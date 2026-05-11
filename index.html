@@ -21,8 +21,8 @@
         /* Grid Produk */
         .container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
         .kad { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .kad img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-        .info { padding: 10px; flex-grow: 1; }
+        .kad img { width: 80%; aspect-ratio: 1/1; object-fit: cover; }
+        .info { padding: 8px; flex-grow: 1; }
         .info h2 { font-size: 0.85rem; height: 2.2rem; overflow: hidden; margin-bottom: 5px; }
         .harga { color: #ee4d2d; font-weight: bold; margin-bottom: 10px; }
         .butang { background: #ee4d2d; color: white; text-decoration: none; text-align: center; padding: 8px; border-radius: 5px; display: block; font-size: 0.8rem; font-weight: bold; }
@@ -36,14 +36,14 @@
     <div class="kategori-container">
         <button class="btn-kat active" onclick="filterKategori('semua', this)">Semua</button>
         <button class="btn-kat" onclick="filterKategori('gadget', this)">Gadget</button>
-        <button class="btn-kat" onclick="filterKategori('kerusi', this)">Dapur</button>
+        <button class="btn-kat" onclick="filterKategori('kerusi', this)">kerusi</button>
         <button class="btn-kat" onclick="filterKategori('pakaian', this)">Pakaian</button>
     </div>
 </header>
 
 <div class="container" id="produkList">
     <!-- BARANG 1 -->
-    <div class="kerusi" data-kategori="gadget">
+    <div class="kerusi" data-kategori="kerusi">
         <img src="https://raw.githubusercontent.com/asrulazizi333-coder/Shopee-Catalogue/refs/heads/main/IMG_5939.jpeg">
         <div class="info">
             <h2 class="【WTHB】Camping chair Outdoor Folding Chair Hight Back Adjustable Moon Chair Fishing Chair Kerusi Camping">Kerusi Camping</h2>
