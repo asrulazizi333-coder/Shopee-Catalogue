@@ -1,33 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="ms">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Affiliate Saya</title>
+    <title>Katalog Shopee By Azizi</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f0f2f5; padding: 20px; }
-        .kad { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        img { width: 100%; border-radius: 15px; }
-        h2 { font-size: 18px; margin: 10px 0; }
-        .harga { color: red; font-weight: bold; }
-        .butang { background: #007AFF; color: white; text-decoration: none; padding: 12px; display: block; border-radius: 10px; margin-top: 10px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: #f4f4f4; padding-bottom: 50px; }
+        
+        /* Header & Search */
+        header { background: white; padding: 15px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.2rem; text-align: center; margin-bottom: 10px; color: #ee4d2d; }
+        #searchInput { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; }
+        
+        /* Category Buttons */
+        .kategori-container { display: flex; gap: 8px; overflow-x: auto; padding: 5px 0; }
+        .btn-kat { padding: 8px 15px; border-radius: 20px; border: none; background: #ddd; white-space: nowrap; font-size: 0.8rem; cursor: pointer; }
+        .btn-kat.active { background: #ee4d2d; color: white; }
+
+        /* Grid Produk */
+        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
+        .kad { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .kad img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .info { padding: 10px; flex-grow: 1; }
+        .info h2 { font-size: 0.85rem; height: 2.2rem; overflow: hidden; margin-bottom: 5px; }
+        .harga { color: #ee4d2d; font-weight: bold; margin-bottom: 10px; }
+        .butang { background: #ee4d2d; color: white; text-decoration: none; text-align: center; padding: 8px; border-radius: 5px; display: block; font-size: 0.8rem; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1 style="text-align:center">Barang Viral Shopee By Azizi</h1>
 
-            <!-- Barang 1 -->
-    <div class="kad">
+<header>
+    <h1>🛍️ Katalog Viral</h1>
+    <input type="text" id="searchInput" onkeyup="cariBarang()" placeholder="Cari barang...">
+    <div class="kategori-container">
+        <button class="btn-kat active" onclick="filterKategori('semua', this)">Semua</button>
+        <button class="btn-kat" onclick="filterKategori('gadget', this)">Gadget</button>
+        <button class="btn-kat" onclick="filterKategori('dapur', this)">Dapur</button>
+        <button class="btn-kat" onclick="filterKategori('pakaian', this)">Pakaian</button>
+    </div>
+</header>
+
+<div class="container" id="produkList">
+    <!-- BARANG 1 -->
+    <div class="Healing" data-kategori="gadget">
         <img src="https://raw.githubusercontent.com/asrulazizi333-coder/Shopee-Catalogue/refs/heads/main/IMG_5939.jpeg">
-        <h2>【WTHB】Camping chair Outdoor Folding Chair Hight Back Adjustable Moon Chair Fishing Chair Kerusi Camping</h2>
-        <p class="harga">RM 99.00</p>
-        <a href="https://my.shp.ee/LL7gwFRF" class="butang">Beli Di Shopee</a>
-        <a href="https://wa.me/601125882550" style="background:#25D366;" class="butang">Tanya Seller</a>
+        <div class="info">
+            <h2 class="【WTHB】Camping chair Outdoor Folding Chair Hight Back Adjustable Moon Chair Fishing Chair Kerusi Camping">Powerbank 20000mAh</h2>
+            <p class="harga">RM 21.00</p>
+            <a href="https://s.shopee.com.my/3qJrhLFOcs" class="butang">Beli Sekarang</a>
+        </div>
     </div>
 
-    <!-- Barang 2 (Copy & Paste dari sini untuk tambah barang lagi) -->
-    <div class="kad">
-        <img src="PAUTAN_GAMBAR_PRODUK_2">
-        <h2>Nama Produk Viral 2</h2>
-        <p class="harga">RM 80.00</p>
-        <a href="LINK_AFFILIATE_ANDA" class="butang">Beli Di Shopee</a>
+    <!-- BARANG 2 -->
+    <div class="kad" data-kategori="dapur">
+        <img src="https://picsum.photos/201">
+        <div class="info">
+            <h2 class="nama-produk">Air Fryer Digital</h2>
+            <p class="harga">RM 120.00</p>
+            <a href="LINK_AFFILIATE_ANDA" class="butang">Beli Sekarang</a>
+        </div>
     </div>
+</div>
+
+<script>
+function cariBarang() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let kad = document.getElementsByClassName('kad');
+    for (let i = 0; i < kad.length; i++) {
+        let nama = kad[i].querySelector('.nama-produk').innerText.toLowerCase();
+        kad[i].style.display = nama.includes(input) ? "" : "none";
+    }
+}
+
+function filterKategori(kat, btn) {
+    let kad = document.getElementsByClassName('kad');
+    let buttons = document.getElementsByClassName('btn-kat');
+    
+    // Tukar warna butang aktif
+    for (let b of buttons) b.classList.remove('active');
+    btn.classList.add('active');
+
+    for (let i = 0; i < kad.length; i++) {
+        if (kat === 'semua' || kad[i].getAttribute('data-kategori') === kat) {
+            kad[i].style.display = "";
+        } else {
+            kad[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
