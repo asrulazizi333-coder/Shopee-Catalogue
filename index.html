@@ -92,17 +92,7 @@
             background-size: 200% 100%; animation: shimmer 1.5s infinite;
             width: 100%; aspect-ratio: 1 / 1;
         }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    #scrollProgress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px; /* Ketebalan garisan */
-    background: linear-gradient(to right, #ee4d2d, #ffc107); /* Warna Shopee */
-    z-index: 2000;
-    transition: width 0.1s ease-out;
-}
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 
 /* Kotak laluan di tepi skrin */
 #customScrollbarContainer {
     position: fixed;
@@ -307,17 +297,11 @@
     let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     
-    // Peratusan skrol (0 hingga 100)
-    let scrolled = (winScroll / totalHeight) * 100;
-
     // KIRA PANJANG & KEDUDUKAN SCROLLBAR KANAN
     let thumb = document.getElementById("customScrollbarThumb");
-    
-    // Panjang batang skrol (thumb) berubah ikut panjang content
     let thumbHeightPercent = (window.innerHeight / document.documentElement.scrollHeight) * 100;
     thumb.style.height = thumbHeightPercent + "%";
     
-    // Kedudukan batang skrol
     let position = (winScroll / document.documentElement.scrollHeight) * 100;
     thumb.style.top = position + "%";
 
