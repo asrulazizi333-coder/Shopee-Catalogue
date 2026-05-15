@@ -680,22 +680,26 @@
 
     susunIkutPopular();
     tunjuk();
-        // Fungsi untuk buat skeleton loading automatik
-    document.querySelectorAll('.kad img').forEach(img => {
-        // Tambah class skeleton pada parent (pembungkus) gambar
-        let wrapper = img.parentElement;
-        wrapper.classList.add('skeleton');
+            document.querySelectorAll('.kad').forEach(kad => {
+        let img = kad.querySelector('img');
         
-        // Bila gambar siap load, buang skeleton
+        // 1. Cipta kotak kelabu (skeleton)
+        let skeleton = document.createElement('div');
+        skeleton.className = 'skeleton-box';
+        
+        // 2. Letak skeleton sebelum gambar
+        img.parentNode.insertBefore(skeleton, img);
+
+        // 3. Bila gambar siap load
         img.onload = function() {
-            img.classList.add('loaded');
-            wrapper.classList.remove('skeleton');
+            skeleton.remove(); // Buang kotak kelabu
+            img.style.display = 'block'; // Tunjuk gambar
         };
 
-        // Jika gambar sudah ada dalam cache (dah siap load)
+        // 4. Kalau gambar dah sedia ada dalam cache
         if (img.complete) {
-            img.classList.add('loaded');
-            wrapper.classList.remove('skeleton');
+            skeleton.remove();
+            img.style.display = 'block';
         }
     });
 </script>
