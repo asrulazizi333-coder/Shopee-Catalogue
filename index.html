@@ -310,7 +310,9 @@
 </div>
 
 <script>
-    let pageSekarang = 1;
+    // 1. Ambil semula halaman terakhir yang disimpan dalam memori telefon
+    let simpananPage = localStorage.getItem('halamanTerakhir');
+    let pageSekarang = simpananPage ? parseInt(simpananPage) : 1;
 
     function rekodKlik(namaProduk) {
         let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
@@ -370,10 +372,13 @@
 
     function tukarHalaman(n) {
         pageSekarang += n;
+        // SIMPAN halaman ke memori telefon setiap kali tukar page
+        localStorage.setItem('halamanTerakhir', pageSekarang);
         window.scrollTo(0,0);
         tunjuk();
     }
 
+    // Jalankan susunan dulu, baru paparkan
     susunIkutPopular();
     tunjuk();
 </script>
