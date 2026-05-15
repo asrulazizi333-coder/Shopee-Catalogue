@@ -103,6 +103,26 @@
     z-index: 2000;
     transition: width 0.1s ease-out;
 }
+/* 1. Lebar Scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Jadikan dia nipis dan kemas */
+}
+
+/* 2. Warna Laluan (Track) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* 3. Warna Batang Skrol (Thumb) */
+::-webkit-scrollbar-thumb {
+    background: #ee4d2d; /* Warna oren Shopee */
+    border-radius: 10px; /* Jadikan hujungnya bulat */
+}
+
+/* 4. Warna bila kita sentuh/hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #d73d20; 
+}
     </style>
 </head>
 <body>
