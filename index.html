@@ -595,8 +595,11 @@
         kads.forEach(kad => container.appendChild(kad));
     }
 
-    function tunjuk() {
-        let kad = document.getElementsByClassName('kad');
+        function tunjuk() {
+        // Kita ambil senarai kad yang TERKINI (yang sudah disusun ikut popular)
+        let container = document.getElementById('produkList');
+        let kad = container.getElementsByClassName('kad');
+        
         let cari = document.getElementById('searchInput').value.toLowerCase();
         let itemsPerPage = 10;
         
@@ -613,11 +616,14 @@
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
+                
+                // Logik yang lebih tepat untuk tapis 10 barang
                 if (i >= indexMula && i < indexTamat) {
                     kad[i].style.display = "flex";
                 } else {
                     kad[i].style.display = "none";
                 }
+                
                 if (i >= indexTamat) {
                     adaSeterusnya = true;
                 }
@@ -629,9 +635,11 @@
         document.getElementById('btnNext').disabled = !adaSeterusnya;
     }
 
-    function tukarHalaman(n) {
-        pageSekarang += n;
-        // Simpan posisi hanya untuk kegunaan 'Back' atau 'Switch Tab'
+        function tukarHalaman(n) {
+        let baru = pageSekarang + n;
+        if (baru < 1) return; // Jangan bagi pergi page 0
+        
+        pageSekarang = baru;
         sessionStorage.setItem('halamanTerakhir', pageSekarang);
         window.scrollTo(0,0);
         tunjuk();
