@@ -281,10 +281,19 @@
     tunjuk();
     applySkeleton();
     window.onscroll = function() {
+    // 1. LOGIK PROGRESS BAR
     let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     let scrolled = (winScroll / height) * 100;
     document.getElementById("scrollProgress").style.width = scrolled + "%";
+
+    // 2. LOGIK BUTANG BACK TO TOP (ARROW)
+    let btn = document.getElementById("backToTop");
+    if (winScroll > 300) {
+        btn.style.display = "flex";
+    } else {
+        btn.style.display = "none";
+    }
 };
 </script>
 </body>
