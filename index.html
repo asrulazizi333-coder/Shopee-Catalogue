@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Viral 10 Page</title>
+    <title>Katalog Rapat & Kemas</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
         
@@ -12,8 +12,6 @@
             max-width: 450px; 
             margin: 0 auto; 
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         header { 
@@ -24,27 +22,24 @@
         h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
         #searchInput { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; outline: none; }
 
-        /* SUSUNAN BARANG: PAKSA 2 ITEM SEBARIS GUNA FLEX */
+        /* GRID 2 SEBARIS */
         .container { 
             display: flex;
-            flex-wrap: wrap; /* Benarkan barang turun ke bawah */
-            gap: 4px; /* Jarak kecil antara barang */
+            flex-wrap: wrap;
+            gap: 6px;
             padding: 6px; 
-            flex-grow: 1;
-            justify-content: space-between; /* Tolak barang ke kiri dan kanan */
+            justify-content: space-between;
         }
         
-        /* Setiap kad mengambil 49% daripada lebar skrin (Muat 2 barang sebaris) */
         .kad { 
             background: white; 
             border-radius: 6px; 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
+            width: 49%; /* Paksa 2 sebaris */
+            margin-bottom: 4px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            font-size: 0.75rem;
-            width: 49%; /* Kunci saiz supaya wajib 2 barang */
-            margin-bottom: 6px;
         }
         
         .kad img { 
@@ -54,20 +49,44 @@
             display: block;
         }
         
-        .info { padding: 6px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .info h2 { font-size: 0.75rem; height: 2rem; overflow: hidden; margin-bottom: 4px; line-height: 1.2; color: #333; }
-        .harga { color: #ee4d2d; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; }
+        /* INFO RAPAT: Mengurangkan padding dan margin */
+        .info { 
+            padding: 6px; 
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        .info h2 { 
+            font-size: 0.75rem; 
+            line-height: 1.2; 
+            color: #333; 
+            height: 2rem; 
+            overflow: hidden; 
+            margin-bottom: 2px; /* Jarak sangat rapat dengan harga */
+        }
+        
+        .harga { 
+            color: #ee4d2d; 
+            font-weight: bold; 
+            font-size: 0.85rem; 
+            margin-bottom: 4px; /* Jarak rapat dengan butang */
+        }
         
         .butang { 
-            background: #ee4d2d; color: white; text-decoration: none; text-align: center; 
-            padding: 5px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; display: block;
+            background: #ee4d2d; 
+            color: white; 
+            text-decoration: none; 
+            text-align: center; 
+            padding: 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            font-size: 0.7rem; 
+            display: block;
         }
 
-        /* Pagination */
         .pagination { 
             display: flex; justify-content: center; align-items: center; 
-            gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee;
-            width: 100%;
+            gap: 10px; padding: 15px; background: white; margin-top: 10px;
         }
         .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; }
         .btn-page:disabled { border-color: #ccc; color: #ccc; }
@@ -77,50 +96,35 @@
 <body>
 
 <header>
-    <h1>🛍️ Katalog Viral Azizi</h1>
+    <h1>🛍️ Katalog Viral</h1>
     <input type="text" id="searchInput" onkeyup="tunjuk()" placeholder="Cari barang...">
 </header>
 
 <div class="container" id="produkList">
-
-    <!-- PAGE 1 (Letak 10 Barang) -->
     <div class="kad" data-page="1">
         <img src="https://picsum.photos/200">
         <div class="info">
-            <h2 class="nama-produk">Produk A - Halaman 1</h2>
+            <h2 class="nama-produk">Barang 1</h2>
             <p class="harga">RM 10.00</p>
-            <a href="#" class="butang">Beli</a>
+            <a href="#" class="butang">Beli Sekarang</a>
         </div>
     </div>
-
     <div class="kad" data-page="1">
         <img src="https://picsum.photos/201">
         <div class="info">
-            <h2 class="nama-produk">Produk B - Halaman 1</h2>
+            <h2 class="nama-produk">Barang 2</h2>
             <p class="harga">RM 15.00</p>
-            <a href="#" class="butang">Beli</a>
+            <a href="#" class="butang">Beli Sekarang</a>
         </div>
     </div>
-
-    <!-- PAGE 2 -->
     <div class="kad" data-page="2">
         <img src="https://picsum.photos/202">
         <div class="info">
-            <h2 class="nama-produk">Produk C - Halaman 2</h2>
+            <h2 class="nama-produk">Barang 11 (Page 2)</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli</a>
+            <a href="#" class="butang">Beli Sekarang</a>
         </div>
     </div>
-
-    <div class="kad" data-page="2">
-        <img src="https://picsum.photos/203">
-        <div class="info">
-            <h2 class="nama-produk">Produk D - Halaman 2</h2>
-            <p class="harga">RM 25.00</p>
-            <a href="#" class="butang">Beli</a>
-        </div>
-    </div>
-
 </div>
 
 <div class="pagination">
@@ -148,7 +152,6 @@
                 document.querySelector('.pagination').style.display = "flex";
                 kad[i].style.display = (p == pageSekarang) ? "flex" : "none";
             }
-            
             if (parseInt(p) > pageSekarang) adaSeterusnya = true;
         }
 
@@ -162,9 +165,7 @@
         window.scrollTo(0,0);
         tunjuk();
     }
-
     tunjuk();
 </script>
-
 </body>
 </html>
