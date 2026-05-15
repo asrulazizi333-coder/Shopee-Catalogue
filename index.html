@@ -114,7 +114,34 @@
             width: 100%; aspect-ratio: 1 / 1;
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    </style>
+        .badge-hot {
+    position: absolute; 
+    top: 8px; 
+    left: 8px; 
+    padding: 4px 8px;
+    border-radius: 4px; 
+    font-size: 0.65rem; 
+    font-weight: 800; 
+    color: white;
+    z-index: 10; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    
+    /* KESAN PULSE */
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* Warna tetap merah api untuk semua top 3 */
+.rank-1, .rank-2, .rank-3 { 
+    background: linear-gradient(45deg, #ff4500, #ff0000); 
+}
+     </style>
 </head>
 <body>
 
@@ -226,35 +253,67 @@
     }
 
     function tunjuk() {
-        susunIkutPopular();
-        let kads = document.getElementsByClassName('kad');
-        let cari = document.getElementById('searchInput').value.toLowerCase();
-        let indexMula = (pageSekarang - 1) * itemsPerPage;
-        let indexTamat = pageSekarang * itemsPerPage;
-        let adaSeterusnya = false;
+    susunIkutPopular(); // Barang automatik susun ikut klik terbanyak
+    let kads = document.getElementsByClassName('kad');
+    let cari = document.getElementById('searchInput').value.toLowerCase();
+    let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {}; // Ambil data klik
+    
+    let indexMula = (pageSekarang - 1) * itemsPerPage;
+    let indexTamat = pageSekarang * itemsPerPage;
+    let adaSeterusnya = false;
 
-        for (let i = 0; i < kads.length; i++) {
-            let nama = kads[i].querySelector('.nama-produk').innerText.toLowerCase();
-            if (cari !== "") {
-                kads[i].style.display = nama.includes(cari) ? "flex" : "none";
-                kads[i].classList.add('nampak');
-                document.querySelector('.pagination').style.display = "none";
-            } else {
-                document.querySelector('.pagination').style.display = "flex";
-                if (i >= indexMula && i < indexTamat) {
-                    kads[i].style.display = "flex";
-                } else {
-                    kads[i].style.display = "none";
-                    kads[i].classList.remove('nampak');
-                }
-                if (i >= indexTamat) adaSeterusnya = true;
+    for (let i = 0; i < kads.length; i++) {
+        let namaAsal = kads[i].querySelector('.nama-produk').innerText;
+        let namaLower = namaAsal.toLowerCase();
+        let jlhKlik = klikData[namaAsal] || 0;
+
+        // --- 1. LOGIK AYAT MOST VIEW & SIMBOL API ---
+        let infoDiv = kads[i].querySelector('.info');
+        let pKlik = kads[i].querySelector('.klik-count') || document.createElement('div');
+        pKlik.className = 'klik-count';
+        pKlik.innerHTML = `🔥 ${jlhKlik} views`; // Ayat most view
+        infoDiv.insertBefore(pKlik, kads[i].querySelector('.butang'));
+
+        // --- 2. LOGIK BADGE PULSE PADA TOP 3 ---
+        let oldBadge = kads[i].querySelector('.badge-hot');
+        if (oldBadge) oldBadge.remove(); // Buang badge lama sebelum update
+
+        if (jlhKlik > 0 && cari === "") {
+            // idx 0, 1, dan 2 adalah kedudukan 1, 2, dan 3 selepas disusun
+            if (i === 0 || i === 1 || i === 2) {
+                tambahBadge(kads[i], 'rank-1', '🔥 MOST VIEWED');
             }
         }
-        document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
-        document.getElementById('btnPrev').disabled = (pageSekarang === 1);
-        document.getElementById('btnNext').disabled = !adaSeterusnya;
-        aktifkanScrollReveal();
+
+        // --- 3. LOGIK SEARCH & PAGINATION ---
+        if (cari !== "") {
+            kads[i].style.display = namaLower.includes(cari) ? "flex" : "none";
+            kads[i].classList.add('nampak');
+            document.querySelector('.pagination').style.display = "none";
+        } else {
+            document.querySelector('.pagination').style.display = "flex";
+            if (i >= indexMula && i < indexTamat) {
+                kads[i].style.display = "flex";
+            } else {
+                kads[i].style.display = "none";
+                kads[i].classList.remove('nampak');
+            }
+            if (i >= indexTamat) adaSeterusnya = true;
+        }
     }
+    document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
+    document.getElementById('btnPrev').disabled = (pageSekarang === 1);
+    document.getElementById('btnNext').disabled = !adaSeterusnya;
+    aktifkanScrollReveal();
+}
+
+// Pastikan fungsi helper ini ada di bawah/luar fungsi tunjuk()
+function tambahBadge(kad, kelas, teks) {
+    let b = document.createElement('div');
+    b.className = `badge-hot ${kelas}`;
+    b.innerText = teks;
+    kad.appendChild(b);
+}
 
     function tukarHalaman(n) {
         pageSekarang += n;
