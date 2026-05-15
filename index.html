@@ -7,11 +7,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
         
-        html {
-            background: #e4e4e4;
-            display: flex;
-            justify-content: center;
-        }
+        html { background: #e4e4e4; display: flex; justify-content: center; }
 
         body { 
             background: #f0f0f0; 
@@ -23,7 +19,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* FEATURE 1: HEADER BLUR (GLASSMORPHISM) */
+        /* FEATURE: HEADER BLUR (GLASSMORPHISM) */
         header { 
             background: rgba(255, 255, 255, 0.75); 
             padding: 10px; 
@@ -33,188 +29,67 @@
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 1px 5px rgba(0,0,0,0.05); 
         }
         
         h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
-        
         #searchInput { 
-            width: 100%; 
-            padding: 8px; 
-            border-radius: 6px; 
-            border: 1px solid #ddd; 
-            font-size: 16px; 
-            outline: none; 
-            background: rgba(255, 255, 255, 0.8);
+            width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; 
+            font-size: 16px; outline: none; background: rgba(255, 255, 255, 0.8);
         }
 
         .container { 
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding: 6px; 
-            justify-content: space-between;
-            flex-grow: 1;
+            display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; 
+            justify-content: space-between; flex-grow: 1;
         }
         
-        /* FEATURE 2: SCROLL REVEAL (STYLE ASAL) */
+        /* FEATURE: SCROLL REVEAL STYLE */
         .kad { 
-            background: white; 
-            border-radius: 6px; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            width: 49%; 
-            margin-bottom: 4px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            
-            /* Animasi Reveal */
+            background: white; border-radius: 6px; overflow: hidden; 
+            display: flex; flex-direction: column; width: 49%; 
+            margin-bottom: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
             opacity: 0; 
             transform: translateY(30px); 
             transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        /* Muncul bila masuk skrin */
-        .kad.nampak { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .kad.nampak { opacity: 1; transform: translateY(0); }
+        .kad img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
         
-        .kad img { 
-            width: 100%; 
-            aspect-ratio: 1 / 1; 
-            object-fit: cover; 
-            display: block;
-        }
-        
-        .info { 
-            padding: 6px; 
-            display: flex; 
-            flex-direction: column;
-        }
-        
-        .info h2 { 
-            font-size: 0.75rem; 
-            line-height: 1.2; 
-            color: #333; 
-            height: 2rem; 
-            overflow: hidden; 
-            margin-bottom: 2px; 
-        }
-        
-        .harga { 
-            color: #ee4d2d; 
-            font-weight: bold; 
-            font-size: 0.85rem; 
-            margin-bottom: 4px; 
-        }
-        
-        .butang { 
-            background: #ee4d2d; 
-            color: white; 
-            text-decoration: none; 
-            text-align: center; 
-            padding: 6px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            font-size: 0.7rem; 
-            display: block;
-        }
+        .info { padding: 6px; display: flex; flex-direction: column; }
+        .info h2 { font-size: 0.75rem; line-height: 1.2; color: #333; height: 2rem; overflow: hidden; margin-bottom: 2px; }
+        .harga { color: #ee4d2d; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; }
+        .butang { background: #ee4d2d; color: white; text-decoration: none; text-align: center; padding: 6px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; display: block; }
 
         .pagination { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 15px; 
-            padding: 15px; 
-            background: white; 
-            margin-top: auto; 
-            width: 100%;
-            border-top: 1px solid #eee;
+            display: flex; justify-content: center; align-items: center; 
+            gap: 15px; padding: 15px; background: white; border-top: 1px solid #eee;
         }
-        
         .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; font-weight: bold; }
         .btn-page:disabled { border-color: #ccc; color: #ccc; }
-        #pageNumber { font-size: 0.8rem; font-weight: bold; color: #333; }
 
-        /* Dark Mode Styles */
+        /* Dark Mode */
         body.dark-mode { background: #121212; }
         body.dark-mode header { background: rgba(30, 30, 30, 0.75); border-color: rgba(255, 255, 255, 0.05); }
-        body.dark-mode .kad, 
-        body.dark-mode .pagination { background: #1e1e1e; color: white; border-color: #333; }
-        body.dark-mode .info h2, 
-        body.dark-mode #pageNumber { color: #e0e0e0; }
-        body.dark-mode #searchInput { background: #333; color: white; border-color: #444; }
-        body.dark-mode .btn-page { background: #1e1e1e; color: #ff6433; border-color: #ff6433; }
-        
-        #darkModeToggle {
-            position: fixed; 
-            bottom: 15px; 
-            left: 15px; 
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.4); 
-            color: white; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 6px; 
-            padding: 5px 8px;   
-            cursor: pointer; 
-            font-size: 0.65rem; 
-            font-weight: bold;
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.3s ease;
-        }
+        body.dark-mode .kad, body.dark-mode .pagination { background: #1e1e1e; color: white; }
+        body.dark-mode .info h2 { color: #e0e0e0; }
+        body.dark-mode #searchInput { background: #333; color: white; }
 
-        body.dark-mode #darkModeToggle { 
-            background: rgba(238, 77, 45, 0.5); 
-            border-color: rgba(255, 255, 255, 0.2);
+        #darkModeToggle, #backToTop {
+            position: fixed; z-index: 1000; background: rgba(0, 0, 0, 0.4); 
+            color: white; border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            cursor: pointer; transition: 0.3s;
         }
+        #darkModeToggle { bottom: 15px; left: 15px; border-radius: 6px; padding: 5px 8px; font-size: 0.65rem; font-weight: bold; display: flex; align-items: center; gap: 4px; }
+        #backToTop { bottom: 15px; right: 15px; border-radius: 8px; padding: 8px 12px; display: none; font-size: 0.9rem; font-weight: bold; }
+        body.dark-mode #darkModeToggle, body.dark-mode #backToTop { background: rgba(238, 77, 45, 0.5); }
 
-        #backToTop {
-            position: fixed;
-            bottom: 15px;
-            right: 15px; 
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.4);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px; 
-            padding: 8px 12px;
-            display: none; 
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            font-size: 0.9rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode #backToTop {
-            background: rgba(238, 77, 45, 0.5);
-        }
-
-        /* Skeleton Loading Style */
         .skeleton-box {
-            background: #ddd;
-            background: linear-gradient(90deg, #ddd 25%, #e6e6e6 50%, #ddd 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            display: block;
+            background: #ddd; background: linear-gradient(90deg, #ddd 25%, #e6e6e6 50%, #ddd 75%);
+            background-size: 200% 100%; animation: shimmer 1.5s infinite;
+            width: 100%; aspect-ratio: 1 / 1;
         }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
@@ -223,20 +98,22 @@
 <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
 
 <header>
-    <h1 onclick="sessionStorage.removeItem('halamanTerakhir'); window.location.reload();" style="cursor: pointer;">
-        🛍️ Katalog Shopee By Ashraf Ezra
-    </h1>
+    <h1 onclick="window.location.reload();" style="cursor: pointer;">🛍️ Katalog Shopee By Ashraf Ezra</h1>
     <input type="text" id="searchInput" onkeyup="tunjuk()" placeholder="Cari barang...">
 </header>
 
 <div class="container" id="produkList">
     <div class="kad">
         <img src="https://down-my.img.susercontent.com/file/my-11134207-820lc-mk299ppbr1mq92@resize_w1920_nl.webp">
-        <div class="info">
-            <h2 class="nama-produk">Kerusi Healing</h2>
-            <p class="harga">RM 20.37 - RM 96.03</p>
-            <a href="https://s.shopee.com.my/4qCUvQ7ReT" target="_blank" onclick="rekodKlik('Kerusi Healing')" class="butang">Beli Sekarang</a>
-        </div>
+        <div class="info"><h2 class="nama-produk">Kerusi Healing</h2><p class="harga">RM 20.37 - RM 96.03</p><a href="https://s.shopee.com.my/4qCUvQ7ReT" target="_blank" onclick="rekodKlik('Kerusi Healing')" class="butang">Beli Sekarang</a></div>
+    </div>
+    <div class="kad">
+        <img src="https://down-my.img.susercontent.com/file/my-11134207-7rasl-m3qndlu7cfwe30@resize_w1920_nl.webp">
+        <div class="info"><h2 class="nama-produk">Drypers Wee Wee Dry Tape</h2><p class="harga">RM 110.36</p><a href="https://s.shopee.com.my/20sJiqwdRh" target="_blank" onclick="rekodKlik('Drypers Wee Wee Dry Tape')" class="butang">Beli Sekarang</a></div>
+    </div>
+    <div class="kad">
+        <img src="https://picsum.photos/202">
+        <div class="info"><h2 class="nama-produk">Ashraf Ezra Premium</h2><p class="harga">RM 2000.00</p><a href="#" class="butang">Beli Sekarang</a></div>
     </div>
     </div>
 
@@ -247,157 +124,103 @@
 </div>
 
 <script>
-    // 1. TEMA SETTING
+    // AUTO-GENERATE BARANG 4-50 (Sama macam asal anda)
+    const list = document.getElementById('produkList');
+    for(let i=4; i<=50; i++) {
+        let div = document.createElement('div');
+        div.className = 'kad';
+        div.innerHTML = `<img src="https://picsum.photos/20${i+5}">
+            <div class="info"><h2 class="nama-produk">Barang ${i}</h2><p class="harga">RM 20.00</p>
+            <a href="#" onclick="rekodKlik('Barang ${i}')" class="butang">Beli Sekarang</a></div>`;
+        list.appendChild(div);
+    }
+
+    // LOGIK TEMA
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('darkModeToggle').innerText = "☀️ Mod Cerah";
     }
 
     function toggleDarkMode() {
-        let body = document.body;
-        let btn = document.getElementById('darkModeToggle');
-        body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            btn.innerText = "☀️ Mod Cerah";
-            localStorage.setItem('theme', 'dark');
-        } else {
-            btn.innerText = "🌙 Mod Gelap";
-            localStorage.setItem('theme', 'light');
-        }
+        document.body.classList.toggle('dark-mode');
+        let isDark = document.body.classList.contains('dark-mode');
+        document.getElementById('darkModeToggle').innerText = isDark ? "☀️ Mod Cerah" : "🌙 Mod Gelap";
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
-    // 2. NAVIGASI & SEARCH
-    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-        sessionStorage.removeItem('halamanTerakhir');
-    }
+    // LOGIK UTAMA
+    let pageSekarang = 1;
+    let itemsPerPage = 20;
 
-    let simpananPage = sessionStorage.getItem('halamanTerakhir');
-    let pageSekarang = simpananPage ? parseInt(simpananPage) : 1;
-
-    function rekodKlik(namaProduk) {
-        let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
-        klikData[namaProduk] = (klikData[namaProduk] || 0) + 1;
-        localStorage.setItem('statistikKlik', JSON.stringify(klikData));
-    }
-
-    function susunIkutPopular() {
-        let container = document.getElementById('produkList');
-        let kads = Array.from(document.getElementsByClassName('kad'));
-        let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
-
-        kads.sort((a, b) => {
-            let namaA = a.querySelector('.nama-produk').innerText;
-            let namaB = b.querySelector('.nama-produk').innerText;
-            let klikA = klikData[namaA] || 0;
-            let klikB = klikData[namaB] || 0;
-            return klikB - klikA; 
-        });
-
-        kads.forEach(kad => container.appendChild(kad));
+    function rekodKlik(nama) {
+        let data = JSON.parse(localStorage.getItem('statistikKlik')) || {};
+        data[nama] = (data[nama] || 0) + 1;
+        localStorage.setItem('statistikKlik', JSON.stringify(data));
     }
 
     function tunjuk() {
-        let container = document.getElementById('produkList');
-        let kad = container.getElementsByClassName('kad');
+        let kads = document.getElementsByClassName('kad');
         let cari = document.getElementById('searchInput').value.toLowerCase();
-        let itemsPerPage = 20;
-        
         let indexMula = (pageSekarang - 1) * itemsPerPage;
         let indexTamat = pageSekarang * itemsPerPage;
-        let adaSeterusnya = false;
+        let visibleCount = 0;
 
-        for (let i = 0; i < kad.length; i++) {
-            let nama = kad[i].querySelector('.nama-produk').innerText.toLowerCase();
-            
+        for (let i = 0; i < kads.length; i++) {
+            let nama = kads[i].querySelector('.nama-produk').innerText.toLowerCase();
             if (cari !== "") {
-                kad[i].style.display = nama.includes(cari) ? "flex" : "none";
-                kad[i].classList.add('nampak'); // Tunjuk semua hasil carian
+                kads[i].style.display = nama.includes(cari) ? "flex" : "none";
+                kads[i].classList.add('nampak');
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
                 if (i >= indexMula && i < indexTamat) {
-                    kad[i].style.display = "flex";
+                    kads[i].style.display = "flex";
+                    visibleCount++;
                 } else {
-                    kad[i].style.display = "none";
-                    kad[i].classList.remove('nampak'); // Reset animasi bila tukar page
+                    kads[i].style.display = "none";
+                    kads[i].classList.remove('nampak');
                 }
-                if (i >= indexTamat) adaSeterusnya = true;
             }
         }
-
         document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
         document.getElementById('btnPrev').disabled = (pageSekarang === 1);
-        document.getElementById('btnNext').disabled = !adaSeterusnya;
-
-        // FEATURE: Panggil semula animasi selepas tukar page atau search
+        document.getElementById('btnNext').disabled = (indexTamat >= kads.length);
         aktifkanScrollReveal();
     }
 
     function tukarHalaman(n) {
         pageSekarang += n;
-        sessionStorage.setItem('halamanTerakhir', pageSekarang);
-        window.scrollTo(0,0);
+        window.scrollTo({top: 0, behavior: 'smooth'});
         tunjuk();
     }
 
-    // 3. FEATURE: SCROLL REVEAL LOGIC
+    // FEATURE: SCROLL REVEAL
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('nampak');
-            }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('nampak'); });
     }, { threshold: 0.1 });
 
     function aktifkanScrollReveal() {
-        document.querySelectorAll('.kad').forEach(kad => {
-            if (kad.style.display !== 'none') {
-                observer.observe(kad);
-            }
-        });
+        document.querySelectorAll('.kad').forEach(kad => { if (kad.style.display !== 'none') observer.observe(kad); });
     }
 
-    // 4. BACK TO TOP
-    function keAtas() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    function keAtas() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
     window.onscroll = function() {
         let btn = document.getElementById("backToTop");
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            btn.style.display = "flex";
-        } else {
-            btn.style.display = "none";
-        }
+        btn.style.display = (window.scrollY > 300) ? "flex" : "none";
     };
 
-    // 5. SKELETON LOADING
-    function applySkeleton() {
-        document.querySelectorAll('.kad').forEach(kad => {
-            let img = kad.querySelector('img');
-            if (kad.querySelector('.skeleton-box')) return;
+    // SKELETON
+    document.querySelectorAll('.kad img').forEach(img => {
+        let skeleton = document.createElement('div');
+        skeleton.className = 'skeleton-box';
+        img.style.display = 'none';
+        img.parentNode.insertBefore(skeleton, img);
+        img.onload = () => { skeleton.remove(); img.style.display = 'block'; };
+        if (img.complete) { skeleton.remove(); img.style.display = 'block'; }
+    });
 
-            let skeleton = document.createElement('div');
-            skeleton.className = 'skeleton-box';
-            img.style.display = 'none';
-            img.parentNode.insertBefore(skeleton, img);
-
-            img.onload = function() {
-                skeleton.remove();
-                img.style.display = 'block';
-            };
-            if (img.complete) {
-                skeleton.remove();
-                img.style.display = 'block';
-            }
-        });
-    }
-
-    // RUN ALL
-    susunIkutPopular();
     tunjuk();
-    applySkeleton();
 </script>
 </body>
 </html>
