@@ -125,31 +125,34 @@
         
                     #darkModeToggle {
             position: fixed; 
-            bottom: 15px; /* Kedudukan lebih bawah */
+            bottom: 15px; 
             left: 15px; 
             z-index: 1000;
-            background: #333; 
+            /* Kita guna rgba: 0,0,0 adalah hitam, 0.6 adalah 60% kepekatan */
+            background: rgba(0, 0, 0, 0.6); 
             color: white; 
-            border: none; 
-            border-radius: 8px; /* Sudut lebih kemas, bukan bulat penuh */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Garisan nipis sekeliling */
+            border-radius: 8px; 
             padding: 8px 12px; 
             cursor: pointer; 
             font-size: 0.75rem;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            /* Efek blur di belakang butang (Mac-style) */
+            backdrop-filter: blur(5px); 
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 6px; /* Jarakkan emoji dengan teks */
-            transition: all 0.3s ease; /* Efek smooth bila tekan */
+            gap: 6px;
+            transition: all 0.3s ease;
         }
 
-        /* Warna butang bila Dark Mode aktif */
+        /* Warna butang bila Dark Mode aktif (kekal transparent tapi tona oren) */
         body.dark-mode #darkModeToggle { 
-            background: #ee4d2d; 
-            color: white;
+            background: rgba(238, 77, 45, 0.7); 
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Efek bila butang ditekan */
         #darkModeToggle:active {
             transform: scale(0.95);
         }
