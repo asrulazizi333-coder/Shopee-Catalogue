@@ -680,6 +680,24 @@
 
     susunIkutPopular();
     tunjuk();
+        // Fungsi untuk buat skeleton loading automatik
+    document.querySelectorAll('.kad img').forEach(img => {
+        // Tambah class skeleton pada parent (pembungkus) gambar
+        let wrapper = img.parentElement;
+        wrapper.classList.add('skeleton');
+        
+        // Bila gambar siap load, buang skeleton
+        img.onload = function() {
+            img.classList.add('loaded');
+            wrapper.classList.remove('skeleton');
+        };
+
+        // Jika gambar sudah ada dalam cache (dah siap load)
+        if (img.complete) {
+            img.classList.add('loaded');
+            wrapper.classList.remove('skeleton');
+        }
+    });
 </script>
 </body>
 </html>
