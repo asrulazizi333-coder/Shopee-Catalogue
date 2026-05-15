@@ -23,20 +23,30 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
+        /* FEATURE 1: HEADER BLUR (GLASSMORPHISM) */
         header { 
-            background: white; padding: 10px; position: sticky; top: 0; z-index: 100; 
-            box-shadow: 0 1px 5px rgba(0,0,0,0.1); 
+            background: rgba(255, 255, 255, 0.75); 
+            padding: 10px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05); 
         }
         
         h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
+        
         #searchInput { 
-    width: 100%; 
-    padding: 8px; 
-    border-radius: 6px; 
-    border: 1px solid #ddd; 
-    font-size: 16px; /* Pastikan nombor ni 16 */
-    outline: none; 
-}
+            width: 100%; 
+            padding: 8px; 
+            border-radius: 6px; 
+            border: 1px solid #ddd; 
+            font-size: 16px; 
+            outline: none; 
+            background: rgba(255, 255, 255, 0.8);
+        }
 
         .container { 
             display: flex;
@@ -47,6 +57,7 @@
             flex-grow: 1;
         }
         
+        /* FEATURE 2: SCROLL REVEAL (STYLE ASAL) */
         .kad { 
             background: white; 
             border-radius: 6px; 
@@ -56,6 +67,17 @@
             width: 49%; 
             margin-bottom: 4px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            
+            /* Animasi Reveal */
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        /* Muncul bila masuk skrin */
+        .kad.nampak { 
+            opacity: 1; 
+            transform: translateY(0); 
         }
         
         .kad img { 
@@ -110,12 +132,14 @@
             width: 100%;
             border-top: 1px solid #eee;
         }
+        
         .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; font-weight: bold; }
         .btn-page:disabled { border-color: #ccc; color: #ccc; }
         #pageNumber { font-size: 0.8rem; font-weight: bold; color: #333; }
-                /* Dark Mode Styles */
+
+        /* Dark Mode Styles */
         body.dark-mode { background: #121212; }
-        body.dark-mode header, 
+        body.dark-mode header { background: rgba(30, 30, 30, 0.75); border-color: rgba(255, 255, 255, 0.05); }
         body.dark-mode .kad, 
         body.dark-mode .pagination { background: #1e1e1e; color: white; border-color: #333; }
         body.dark-mode .info h2, 
@@ -123,46 +147,42 @@
         body.dark-mode #searchInput { background: #333; color: white; border-color: #444; }
         body.dark-mode .btn-page { background: #1e1e1e; color: #ff6433; border-color: #ff6433; }
         
-           #darkModeToggle {
-    position: fixed; 
-    bottom: 15px; 
-    left: 15px; 
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.4); 
-    color: white; 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: 6px; /* Lebih kecil & kemas */
-    padding: 5px 8px;   /* Kecilkan ruang dalam kotak */
-    cursor: pointer; 
-    font-size: 0.65rem; /* Kecilkan saiz tulisan */
-    font-weight: bold;
-    backdrop-filter: blur(8px); 
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 4px; /* Rapatkan emoji dengan teks */
-    transition: all 0.3s ease;
-}
+        #darkModeToggle {
+            position: fixed; 
+            bottom: 15px; 
+            left: 15px; 
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.4); 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 6px; 
+            padding: 5px 8px;   
+            cursor: pointer; 
+            font-size: 0.65rem; 
+            font-weight: bold;
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
 
-/* Warna bila Dark Mode aktif */
-body.dark-mode #darkModeToggle { 
-    background: rgba(238, 77, 45, 0.5); 
-    border-color: rgba(255, 255, 255, 0.2);
-}
+        body.dark-mode #darkModeToggle { 
+            background: rgba(238, 77, 45, 0.5); 
+            border-color: rgba(255, 255, 255, 0.2);
+        }
 
-#darkModeToggle:active {
-    transform: scale(0.92); /* Efek tekan lebih nampak */
-}
-                     #backToTop {
+        #backToTop {
             position: fixed;
             bottom: 15px;
-            right: 15px; /* Tukar dari left: 50% ke right: 15px */
+            right: 15px; 
             z-index: 1000;
             background: rgba(0, 0, 0, 0.4);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px; /* Tukar jadi petak rounded supaya sama dengan butang Dark Mode */
+            border-radius: 8px; 
             padding: 8px 12px;
             display: none; 
             align-items: center;
@@ -176,18 +196,32 @@ body.dark-mode #darkModeToggle {
             transition: all 0.3s ease;
         }
 
-        #backToTop:active {
-            transform: scale(0.9);
-        }
-
         body.dark-mode #backToTop {
             background: rgba(238, 77, 45, 0.5);
+        }
+
+        /* Skeleton Loading Style */
+        .skeleton-box {
+            background: #ddd;
+            background: linear-gradient(90deg, #ddd 25%, #e6e6e6 50%, #ddd 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: block;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
+
 <button id="backToTop" onclick="keAtas()">↑</button>
 <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
+
 <header>
     <h1 onclick="sessionStorage.removeItem('halamanTerakhir'); window.location.reload();" style="cursor: pointer;">
         🛍️ Katalog Shopee By Ashraf Ezra
@@ -204,400 +238,7 @@ body.dark-mode #darkModeToggle {
             <a href="https://s.shopee.com.my/4qCUvQ7ReT" target="_blank" onclick="rekodKlik('Kerusi Healing')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-        <div class="kad">
-        <img src="https://down-my.img.susercontent.com/file/my-11134207-7rasl-m3qndlu7cfwe30@resize_w1920_nl.webp">
-        <div class="info">
-            <h2 class="nama-produk">Drypers Wee Wee Dry Tape</h2> 
-            <p class="harga">RM 110.36</p>
-            <a href="https://s.shopee.com.my/20sJiqwdRh" target="_blank" onclick="rekodKlik('Drypers Wee Wee Dry Tape')" class="butang">Beli Sekarang</a>
-        </div>
     </div>
-    <div class="kad">
-        <img src="https://picsum.photos/202">
-        <div class="info">
-            <h2 class="nama-produk">Ashraf Ezra</h2>
-            <p class="harga">RM 2000.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Ashraf Ezra')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/203">
-        <div class="info">
-            <h2 class="nama-produk">Barang 4</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 4')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/204">
-        <div class="info">
-            <h2 class="nama-produk">Barang 5</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 5')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/205">
-        <div class="info">
-            <h2 class="nama-produk">Barang 6</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 6')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/206">
-        <div class="info">
-            <h2 class="nama-produk">Barang 7</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 7')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/207">
-        <div class="info">
-            <h2 class="nama-produk">Barang 8</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 8')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/208">
-        <div class="info">
-            <h2 class="nama-produk">Barang 9</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 9')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/209">
-        <div class="info">
-            <h2 class="nama-produk">Barang 10</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 10')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-
-    <div class="kad">
-        <img src="https://picsum.photos/210">
-        <div class="info">
-            <h2 class="nama-produk">Barang 11</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 11')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/211">
-        <div class="info">
-            <h2 class="nama-produk">Barang 12</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 12')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/212">
-        <div class="info">
-            <h2 class="nama-produk">Barang 13</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 13')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/213">
-        <div class="info">
-            <h2 class="nama-produk">Barang 14</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 14')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/214">
-        <div class="info">
-            <h2 class="nama-produk">Barang 15</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 15')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/215">
-        <div class="info">
-            <h2 class="nama-produk">Barang 16</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 16')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/216">
-        <div class="info">
-            <h2 class="nama-produk">Barang 17</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 17')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/217">
-        <div class="info">
-            <h2 class="nama-produk">Barang 18</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 18')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/218">
-        <div class="info">
-            <h2 class="nama-produk">Barang 19</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 19')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-        <div class="kad">
-        <img src="https://picsum.photos/220">
-        <div class="info">
-            <h2 class="nama-produk">Barang 20</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 20')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/221">
-        <div class="info">
-            <h2 class="nama-produk">Barang 21</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 21')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/222">
-        <div class="info">
-            <h2 class="nama-produk">Barang 22</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 22')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/223">
-        <div class="info">
-            <h2 class="nama-produk">Barang 23</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 23')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/224">
-        <div class="info">
-            <h2 class="nama-produk">Barang 24</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 24')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/225">
-        <div class="info">
-            <h2 class="nama-produk">Barang 25</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 25')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/226">
-        <div class="info">
-            <h2 class="nama-produk">Barang 26</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 26')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/227">
-        <div class="info">
-            <h2 class="nama-produk">Barang 27</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 27')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/228">
-        <div class="info">
-            <h2 class="nama-produk">Barang 28</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 28')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/229">
-        <div class="info">
-            <h2 class="nama-produk">Barang 29</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 29')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/230">
-        <div class="info">
-            <h2 class="nama-produk">Barang 30</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 30')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/231">
-        <div class="info">
-            <h2 class="nama-produk">Barang 31</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 31')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/232">
-        <div class="info">
-            <h2 class="nama-produk">Barang 32</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 32')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/233">
-        <div class="info">
-            <h2 class="nama-produk">Barang 33</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 33')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/234">
-        <div class="info">
-            <h2 class="nama-produk">Barang 34</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 34')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/235">
-        <div class="info">
-            <h2 class="nama-produk">Barang 35</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 35')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/236">
-        <div class="info">
-            <h2 class="nama-produk">Barang 36</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 36')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/237">
-        <div class="info">
-            <h2 class="nama-produk">Barang 37</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 37')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/238">
-        <div class="info">
-            <h2 class="nama-produk">Barang 38</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 38')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/239">
-        <div class="info">
-            <h2 class="nama-produk">Barang 39</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 39')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/240">
-        <div class="info">
-            <h2 class="nama-produk">Barang 40</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 40')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/241">
-        <div class="info">
-            <h2 class="nama-produk">Barang 41</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 41')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/242">
-        <div class="info">
-            <h2 class="nama-produk">Barang 42</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 42')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/243">
-        <div class="info">
-            <h2 class="nama-produk">Barang 43</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 43')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/244">
-        <div class="info">
-            <h2 class="nama-produk">Barang 44</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 44')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/245">
-        <div class="info">
-            <h2 class="nama-produk">Barang 45</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 45')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/246">
-        <div class="info">
-            <h2 class="nama-produk">Barang 46</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 46')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/247">
-        <div class="info">
-            <h2 class="nama-produk">Barang 47</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 47')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/248">
-        <div class="info">
-            <h2 class="nama-produk">Barang 48</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 48')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/249">
-        <div class="info">
-            <h2 class="nama-produk">Barang 49</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 49')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-    <div class="kad">
-        <img src="https://picsum.photos/250">
-        <div class="info">
-            <h2 class="nama-produk">Barang 50</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="#" target="_blank" onclick="rekodKlik('Barang 50')" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-</div>
 
 <div class="pagination">
     <button class="btn-page" id="btnPrev" onclick="tukarHalaman(-1)">Sebelum</button>
@@ -606,7 +247,7 @@ body.dark-mode #darkModeToggle {
 </div>
 
 <script>
-    // Cek memori tema
+    // 1. TEMA SETTING
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('darkModeToggle').innerText = "☀️ Mod Cerah";
@@ -625,8 +266,8 @@ body.dark-mode #darkModeToggle {
             localStorage.setItem('theme', 'light');
         }
     }
-    // 1. Logik untuk 'reset' setiap kali refresh atau buka link baru
-    // Kita guna performance.navigation.type untuk kesan jika user refresh
+
+    // 2. NAVIGASI & SEARCH
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         sessionStorage.removeItem('halamanTerakhir');
     }
@@ -656,17 +297,14 @@ body.dark-mode #darkModeToggle {
         kads.forEach(kad => container.appendChild(kad));
     }
 
-        function tunjuk() {
-        // Kita ambil senarai kad yang TERKINI (yang sudah disusun ikut popular)
+    function tunjuk() {
         let container = document.getElementById('produkList');
         let kad = container.getElementsByClassName('kad');
-        
         let cari = document.getElementById('searchInput').value.toLowerCase();
         let itemsPerPage = 20;
         
         let indexMula = (pageSekarang - 1) * itemsPerPage;
         let indexTamat = pageSekarang * itemsPerPage;
-        
         let adaSeterusnya = false;
 
         for (let i = 0; i < kad.length; i++) {
@@ -674,68 +312,57 @@ body.dark-mode #darkModeToggle {
             
             if (cari !== "") {
                 kad[i].style.display = nama.includes(cari) ? "flex" : "none";
+                kad[i].classList.add('nampak'); // Tunjuk semua hasil carian
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
-                
-                // Logik yang lebih tepat untuk tapis 10 barang
                 if (i >= indexMula && i < indexTamat) {
                     kad[i].style.display = "flex";
                 } else {
                     kad[i].style.display = "none";
+                    kad[i].classList.remove('nampak'); // Reset animasi bila tukar page
                 }
-                
-                if (i >= indexTamat) {
-                    adaSeterusnya = true;
-                }
+                if (i >= indexTamat) adaSeterusnya = true;
             }
         }
 
         document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
         document.getElementById('btnPrev').disabled = (pageSekarang === 1);
         document.getElementById('btnNext').disabled = !adaSeterusnya;
+
+        // FEATURE: Panggil semula animasi selepas tukar page atau search
+        aktifkanScrollReveal();
     }
 
-        function tukarHalaman(n) {
-        let baru = pageSekarang + n;
-        if (baru < 1) return; // Jangan bagi pergi page 0
-        
-        pageSekarang = baru;
+    function tukarHalaman(n) {
+        pageSekarang += n;
         sessionStorage.setItem('halamanTerakhir', pageSekarang);
         window.scrollTo(0,0);
         tunjuk();
     }
 
-    susunIkutPopular();
-    tunjuk();
-            document.querySelectorAll('.kad').forEach(kad => {
-        let img = kad.querySelector('img');
-        
-        // 1. Cipta kotak kelabu (skeleton)
-        let skeleton = document.createElement('div');
-        skeleton.className = 'skeleton-box';
-        
-        // 2. Letak skeleton sebelum gambar
-        img.parentNode.insertBefore(skeleton, img);
+    // 3. FEATURE: SCROLL REVEAL LOGIC
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('nampak');
+            }
+        });
+    }, { threshold: 0.1 });
 
-        // 3. Bila gambar siap load
-        img.onload = function() {
-            skeleton.remove(); // Buang kotak kelabu
-            img.style.display = 'block'; // Tunjuk gambar
-        };
+    function aktifkanScrollReveal() {
+        document.querySelectorAll('.kad').forEach(kad => {
+            if (kad.style.display !== 'none') {
+                observer.observe(kad);
+            }
+        });
+    }
 
-        // 4. Kalau gambar dah sedia ada dalam cache
-        if (img.complete) {
-            skeleton.remove();
-            img.style.display = 'block';
-        }
-    });
-        // Fungsi untuk skrol ke atas dengan 'smooth'
+    // 4. BACK TO TOP
     function keAtas() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Munculkan butang bila user skrol ke bawah lebih 300px
     window.onscroll = function() {
         let btn = document.getElementById("backToTop");
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -744,6 +371,33 @@ body.dark-mode #darkModeToggle {
             btn.style.display = "none";
         }
     };
+
+    // 5. SKELETON LOADING
+    function applySkeleton() {
+        document.querySelectorAll('.kad').forEach(kad => {
+            let img = kad.querySelector('img');
+            if (kad.querySelector('.skeleton-box')) return;
+
+            let skeleton = document.createElement('div');
+            skeleton.className = 'skeleton-box';
+            img.style.display = 'none';
+            img.parentNode.insertBefore(skeleton, img);
+
+            img.onload = function() {
+                skeleton.remove();
+                img.style.display = 'block';
+            };
+            if (img.complete) {
+                skeleton.remove();
+                img.style.display = 'block';
+            }
+        });
+    }
+
+    // RUN ALL
+    susunIkutPopular();
+    tunjuk();
+    applySkeleton();
 </script>
 </body>
 </html>
