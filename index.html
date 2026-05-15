@@ -106,10 +106,27 @@
         .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; font-weight: bold; }
         .btn-page:disabled { border-color: #ccc; color: #ccc; }
         #pageNumber { font-size: 0.8rem; font-weight: bold; color: #333; }
+                /* Dark Mode Styles */
+        body.dark-mode { background: #121212; }
+        body.dark-mode header, 
+        body.dark-mode .kad, 
+        body.dark-mode .pagination { background: #1e1e1e; color: white; border-color: #333; }
+        body.dark-mode .info h2, 
+        body.dark-mode #pageNumber { color: #e0e0e0; }
+        body.dark-mode #searchInput { background: #333; color: white; border-color: #444; }
+        body.dark-mode .btn-page { background: #1e1e1e; color: #ff6433; border-color: #ff6433; }
+        
+        #darkModeToggle {
+            position: fixed; bottom: 80px; left: 20px; z-index: 1000;
+            background: #333; color: white; border: none; border-radius: 50px;
+            padding: 8px 12px; cursor: pointer; font-size: 0.75rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        body.dark-mode #darkModeToggle { background: #ee4d2d; }
     </style>
 </head>
 <body>
-
+<button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
 <header>
     <h1 onclick="sessionStorage.removeItem('halamanTerakhir'); window.location.reload();" style="cursor: pointer;">
         🛍️ Katalog Shopee By Ashraf Ezra
@@ -528,6 +545,25 @@
 </div>
 
 <script>
+    // Cek memori tema
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkModeToggle').innerText = "☀️ Mod Cerah";
+    }
+
+    function toggleDarkMode() {
+        let body = document.body;
+        let btn = document.getElementById('darkModeToggle');
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.innerText = "☀️ Mod Cerah";
+            localStorage.setItem('theme', 'dark');
+        } else {
+            btn.innerText = "🌙 Mod Gelap";
+            localStorage.setItem('theme', 'light');
+        }
+    }
     // 1. Logik untuk 'reset' setiap kali refresh atau buka link baru
     // Kita guna performance.navigation.type untuk kesan jika user refresh
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
