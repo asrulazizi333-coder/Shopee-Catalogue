@@ -526,8 +526,12 @@
 </div>
 
 <script>
-    // 1. Guna sessionStorage supaya ia 'reset' bila user buka semula website/link domain
-    // Tapi ia akan kekal di halaman asal jika user tekan back atau switch tab
+    // 1. Logik untuk 'reset' setiap kali refresh atau buka link baru
+    // Kita guna performance.navigation.type untuk kesan jika user refresh
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+        sessionStorage.removeItem('halamanTerakhir');
+    }
+
     let simpananPage = sessionStorage.getItem('halamanTerakhir');
     let pageSekarang = simpananPage ? parseInt(simpananPage) : 1;
 
@@ -589,7 +593,7 @@
 
     function tukarHalaman(n) {
         pageSekarang += n;
-        // Simpan dalam sessionStorage
+        // Simpan posisi hanya untuk kegunaan 'Back' atau 'Switch Tab'
         sessionStorage.setItem('halamanTerakhir', pageSekarang);
         window.scrollTo(0,0);
         tunjuk();
