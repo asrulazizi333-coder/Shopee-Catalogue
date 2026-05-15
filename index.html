@@ -156,9 +156,41 @@
         #darkModeToggle:active {
             transform: scale(0.95);
         }
+                #backToTop {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%); /* Letak betul-betul tengah */
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%; /* Bulat */
+            width: 40px;
+            height: 40px;
+            display: none; /* Sembunyi dulu, muncul bila skrol bawah */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:active {
+            transform: translateX(-50%) scale(0.9);
+        }
+
+        /* Warna oren bila dark mode */
+        body.dark-mode #backToTop {
+            background: rgba(238, 77, 45, 0.5);
+        }
     </style>
 </head>
 <body>
+<button id="backToTop" onclick="keAtas()">↑</button>
 <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
 <header>
     <h1 onclick="sessionStorage.removeItem('halamanTerakhir'); window.location.reload();" style="cursor: pointer;">
@@ -702,6 +734,20 @@
             img.style.display = 'block';
         }
     });
+        // Fungsi untuk skrol ke atas dengan 'smooth'
+    function keAtas() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Munculkan butang bila user skrol ke bawah lebih 300px
+    window.onscroll = function() {
+        let btn = document.getElementById("backToTop");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = "flex";
+        } else {
+            btn.style.display = "none";
+        }
+    };
 </script>
 </body>
 </html>
