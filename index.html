@@ -103,30 +103,33 @@
     z-index: 2000;
     transition: width 0.1s ease-out;
 }
-/* 1. Lebar Scrollbar */
-::-webkit-scrollbar {
-    width: 6px; /* Jadikan dia nipis dan kemas */
+/* Kotak laluan di tepi skrin */
+#customScrollbarContainer {
+    position: fixed;
+    right: 2px;
+    top: 5px; /* Jarak sikit dari atas */
+    bottom: 5px; /* Jarak sikit dari bawah */
+    width: 6px; 
+    z-index: 2001;
+    background: rgba(0,0,0,0.05); /* Laluan samar */
+    border-radius: 10px;
+    pointer-events: none; /* Supaya tak kacau bila user nak klik link di tepi */
 }
 
-/* 2. Warna Laluan (Track) */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-}
-
-/* 3. Warna Batang Skrol (Thumb) */
-::-webkit-scrollbar-thumb {
-    background: #ee4d2d; /* Warna oren Shopee */
-    border-radius: 10px; /* Jadikan hujungnya bulat */
-}
-
-/* 4. Warna bila kita sentuh/hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #d73d20; 
+/* Batang skrol yang bergerak */
+#customScrollbarThumb {
+    width: 100%;
+    background: #ee4d2d; /* Warna Oren Shopee */
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
 }
     </style>
 </head>
 <body>
-    <div id="scrollProgress"></div>
+    <div id="customScrollbarContainer">
+    <div id="customScrollbarThumb"></div>
+</div>
 <button id="backToTop" onclick="keAtas()">↑</button>
 <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
 
@@ -301,19 +304,26 @@
     tunjuk();
     applySkeleton();
     window.onscroll = function() {
-    // 1. LOGIK PROGRESS BAR
     let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let scrolled = (winScroll / height) * 100;
-    document.getElementById("scrollProgress").style.width = scrolled + "%";
+    let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    // Peratusan skrol (0 hingga 100)
+    let scrolled = (winScroll / totalHeight) * 100;
 
-    // 2. LOGIK BUTANG BACK TO TOP (ARROW)
+    // KIRA PANJANG & KEDUDUKAN SCROLLBAR KANAN
+    let thumb = document.getElementById("customScrollbarThumb");
+    
+    // Panjang batang skrol (thumb) berubah ikut panjang content
+    let thumbHeightPercent = (window.innerHeight / document.documentElement.scrollHeight) * 100;
+    thumb.style.height = thumbHeightPercent + "%";
+    
+    // Kedudukan batang skrol
+    let position = (winScroll / document.documentElement.scrollHeight) * 100;
+    thumb.style.top = position + "%";
+
+    // LOGIK BUTANG BACK TO TOP
     let btn = document.getElementById("backToTop");
-    if (winScroll > 300) {
-        btn.style.display = "flex";
-    } else {
-        btn.style.display = "none";
-    }
+    btn.style.display = (winScroll > 300) ? "flex" : "none";
 };
 </script>
 </body>
