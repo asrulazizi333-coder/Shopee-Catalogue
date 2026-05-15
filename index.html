@@ -114,32 +114,35 @@
             width: 100%; aspect-ratio: 1 / 1;
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .badge-hot {
+        /* Badge pada gambar - Dibuat lebih kecil & halus */
+.badge-hot {
     position: absolute; 
-    top: 8px; 
-    left: 8px; 
-    padding: 4px 8px;
-    border-radius: 4px; 
-    font-size: 0.65rem; 
-    font-weight: 800; 
+    top: 5px; 
+    left: 5px; 
+    padding: 2px 5px; 
+    border-radius: 3px; 
+    font-size: 0.55rem; /* Saiz mini */
+    font-weight: bold; 
     color: white;
     z-index: 10; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background: rgba(255, 69, 0, 0.85); /* Warna api transparan */
     text-transform: uppercase;
-    
-    /* KESAN PULSE */
     animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
+.klik-count { 
+    font-size: 0.75rem; /* Sama saiz nama barang */
+    color: #666; 
+    margin-bottom: 4px; 
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
-/* Warna tetap merah api untuk semua top 3 */
-.rank-1, .rank-2, .rank-3 { 
-    background: linear-gradient(45deg, #ff4500, #ff0000); 
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
 }
      </style>
 </head>
@@ -252,11 +255,11 @@
         kads.forEach(kad => container.appendChild(kad));
     }
 
-    function tunjuk() {
-    susunIkutPopular(); // Barang automatik susun ikut klik terbanyak
+   function tunjuk() {
+    susunIkutPopular(); 
     let kads = document.getElementsByClassName('kad');
     let cari = document.getElementById('searchInput').value.toLowerCase();
-    let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {}; // Ambil data klik
+    let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {}; 
     
     let indexMula = (pageSekarang - 1) * itemsPerPage;
     let indexTamat = pageSekarang * itemsPerPage;
@@ -267,21 +270,22 @@
         let namaLower = namaAsal.toLowerCase();
         let jlhKlik = klikData[namaAsal] || 0;
 
-        // --- 1. LOGIK AYAT MOST VIEW & SIMBOL API ---
+        // --- 1. AYAT VIEWS (KECIL & IKUT SAIZ NAMA BARANG) ---
         let infoDiv = kads[i].querySelector('.info');
         let pKlik = kads[i].querySelector('.klik-count') || document.createElement('div');
         pKlik.className = 'klik-count';
-        pKlik.innerHTML = `🔥 ${jlhKlik} views`; // Ayat most view
+        // Simbol api dikecilkan sedikit di sini
+        pKlik.innerHTML = `<span style="font-size: 0.7rem;">🔥</span> ${jlhKlik} views`; 
         infoDiv.insertBefore(pKlik, kads[i].querySelector('.butang'));
 
-        // --- 2. LOGIK BADGE PULSE PADA TOP 3 ---
+        // --- 2. BADGE PADA GAMBAR (MINI & TAK HALANG GAMBAR) ---
         let oldBadge = kads[i].querySelector('.badge-hot');
-        if (oldBadge) oldBadge.remove(); // Buang badge lama sebelum update
+        if (oldBadge) oldBadge.remove(); 
 
         if (jlhKlik > 0 && cari === "") {
-            // idx 0, 1, dan 2 adalah kedudukan 1, 2, dan 3 selepas disusun
+            // Hanya untuk Top 3 yang sudah disusun
             if (i === 0 || i === 1 || i === 2) {
-                tambahBadge(kads[i], 'rank-1', '🔥 MOST VIEWED');
+                tambahBadge(kads[i], 'rank-1', 'MOST VIEWED');
             }
         }
 
@@ -307,12 +311,13 @@
     aktifkanScrollReveal();
 }
 
-// Pastikan fungsi helper ini ada di bawah/luar fungsi tunjuk()
+// Pastikan fungsi ini juga ada untuk handle simbol api dalam badge
 function tambahBadge(kad, kelas, teks) {
     let b = document.createElement('div');
     b.className = `badge-hot ${kelas}`;
-    b.innerText = teks;
+    b.innerHTML = `<span style="font-size: 0.6rem;">🔥</span> ${teks}`; 
     kad.appendChild(b);
+}
 }
 
     function tukarHalaman(n) {
