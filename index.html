@@ -123,27 +123,35 @@
         body.dark-mode #searchInput { background: #333; color: white; border-color: #444; }
         body.dark-mode .btn-page { background: #1e1e1e; color: #ff6433; border-color: #ff6433; }
         
-                #darkModeToggle {
+                    #darkModeToggle {
             position: fixed; 
-            bottom: 20px; /* Jarak dari bawah skrin (ubah jika perlu) */
+            bottom: 15px; /* Kedudukan lebih bawah */
             left: 15px; 
             z-index: 1000;
             background: #333; 
             color: white; 
             border: none; 
-            border-radius: 10px; /* Bentuk petak sikit untuk gaya vertical */
-            padding: 12px 8px; 
+            border-radius: 8px; /* Sudut lebih kemas, bukan bulat penuh */
+            padding: 8px 12px; 
             cursor: pointer; 
-            font-size: 0.7rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            
-            /* Ini rahsia untuk buat dia menegak */
-            writing-mode: vertical-rl; 
-            text-orientation: mixed;
+            font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
-            justify-content: center;
-            letter-spacing: 1px;
+            gap: 6px; /* Jarakkan emoji dengan teks */
+            transition: all 0.3s ease; /* Efek smooth bila tekan */
+        }
+
+        /* Warna butang bila Dark Mode aktif */
+        body.dark-mode #darkModeToggle { 
+            background: #ee4d2d; 
+            color: white;
+        }
+
+        /* Efek bila butang ditekan */
+        #darkModeToggle:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
