@@ -9,7 +9,7 @@
         
         body { 
             background: #f0f0f0; 
-            max-width: 450px; /* Mengecilkan sedikit lebar keseluruhan */
+            max-width: 450px; 
             margin: 0 auto; 
             min-height: 100vh;
             display: flex;
@@ -22,25 +22,37 @@
         }
         
         h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
-        #searchInput { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; }
+        #searchInput { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; outline: none; }
 
-        /* GRID: 2 Barang Semuka, Saiz Lebih Kecil */
+        /* SUSUNAN BARANG: PAKSA 2 ITEM SEBARIS GUNA FLEX */
         .container { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 6px; /* Jarak antara kotak lebih rapat */
+            display: flex;
+            flex-wrap: wrap; /* Benarkan barang turun ke bawah */
+            gap: 4px; /* Jarak kecil antara barang */
             padding: 6px; 
             flex-grow: 1;
+            justify-content: space-between; /* Tolak barang ke kiri dan kanan */
         }
         
+        /* Setiap kad mengambil 49% daripada lebar skrin (Muat 2 barang sebaris) */
         .kad { 
-            background: white; border-radius: 6px; overflow: hidden; 
-            display: flex; flex-direction: column; 
+            background: white; 
+            border-radius: 6px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
             font-size: 0.75rem;
+            width: 49%; /* Kunci saiz supaya wajib 2 barang */
+            margin-bottom: 6px;
         }
         
-        .kad img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+        .kad img { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover; 
+            display: block;
+        }
         
         .info { padding: 6px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
         .info h2 { font-size: 0.75rem; height: 2rem; overflow: hidden; margin-bottom: 4px; line-height: 1.2; color: #333; }
@@ -48,13 +60,14 @@
         
         .butang { 
             background: #ee4d2d; color: white; text-decoration: none; text-align: center; 
-            padding: 5px; border-radius: 4px; font-weight: bold; font-size: 0.7rem;
+            padding: 5px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; display: block;
         }
 
         /* Pagination */
         .pagination { 
             display: flex; justify-content: center; align-items: center; 
             gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee;
+            width: 100%;
         }
         .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; }
         .btn-page:disabled { border-color: #ccc; color: #ccc; }
@@ -65,29 +78,50 @@
 
 <header>
     <h1>🛍️ Katalog Viral Azizi</h1>
-    <input type="text" id="searchInput" onkeyup="tapis()" placeholder="Cari barang...">
+    <input type="text" id="searchInput" onkeyup="tunjuk()" placeholder="Cari barang...">
 </header>
 
 <div class="container" id="produkList">
 
+    <!-- PAGE 1 (Letak 10 Barang) -->
     <div class="kad" data-page="1">
-        <img src="URL_GAMBAR">
+        <img src="https://picsum.photos/200">
         <div class="info">
-            <h2 class="nama-produk">Produk 1 - Page 1</h2>
+            <h2 class="nama-produk">Produk A - Halaman 1</h2>
             <p class="harga">RM 10.00</p>
-            <a href="LINK" class="butang">Beli</a>
-        </div>
-    </div>
-    <div class="kad" data-page="2">
-        <img src="URL_GAMBAR">
-        <div class="info">
-            <h2 class="nama-produk">Produk 11 - Page 2</h2>
-            <p class="harga">RM 20.00</p>
-            <a href="LINK" class="butang">Beli</a>
+            <a href="#" class="butang">Beli</a>
         </div>
     </div>
 
+    <div class="kad" data-page="1">
+        <img src="https://picsum.photos/201">
+        <div class="info">
+            <h2 class="nama-produk">Produk B - Halaman 1</h2>
+            <p class="harga">RM 15.00</p>
+            <a href="#" class="butang">Beli</a>
+        </div>
     </div>
+
+    <!-- PAGE 2 -->
+    <div class="kad" data-page="2">
+        <img src="https://picsum.photos/202">
+        <div class="info">
+            <h2 class="nama-produk">Produk C - Halaman 2</h2>
+            <p class="harga">RM 20.00</p>
+            <a href="#" class="butang">Beli</a>
+        </div>
+    </div>
+
+    <div class="kad" data-page="2">
+        <img src="https://picsum.photos/203">
+        <div class="info">
+            <h2 class="nama-produk">Produk D - Halaman 2</h2>
+            <p class="harga">RM 25.00</p>
+            <a href="#" class="butang">Beli</a>
+        </div>
+    </div>
+
+</div>
 
 <div class="pagination">
     <button class="btn-page" id="btnPrev" onclick="tukarHalaman(-1)">Sebelum</button>
@@ -108,11 +142,11 @@
             let p = kad[i].getAttribute('data-page');
 
             if (cari !== "") {
-                kad[i].style.display = nama.includes(cari) ? "" : "none";
+                kad[i].style.display = nama.includes(cari) ? "flex" : "none";
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
-                kad[i].style.display = (p == pageSekarang) ? "" : "none";
+                kad[i].style.display = (p == pageSekarang) ? "flex" : "none";
             }
             
             if (parseInt(p) > pageSekarang) adaSeterusnya = true;
@@ -129,7 +163,6 @@
         tunjuk();
     }
 
-    function tapis() { tunjuk(); }
     tunjuk();
 </script>
 
