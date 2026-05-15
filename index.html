@@ -526,8 +526,9 @@
 </div>
 
 <script>
-    // 1. Ambil semula halaman terakhir yang disimpan dalam memori telefon
-    let simpananPage = localStorage.getItem('halamanTerakhir');
+    // 1. Guna sessionStorage supaya ia 'reset' bila user buka semula website/link domain
+    // Tapi ia akan kekal di halaman asal jika user tekan back atau switch tab
+    let simpananPage = sessionStorage.getItem('halamanTerakhir');
     let pageSekarang = simpananPage ? parseInt(simpananPage) : 1;
 
     function rekodKlik(namaProduk) {
@@ -588,13 +589,12 @@
 
     function tukarHalaman(n) {
         pageSekarang += n;
-        // SIMPAN halaman ke memori telefon setiap kali tukar page
-        localStorage.setItem('halamanTerakhir', pageSekarang);
+        // Simpan dalam sessionStorage
+        sessionStorage.setItem('halamanTerakhir', pageSekarang);
         window.scrollTo(0,0);
         tunjuk();
     }
 
-    // Jalankan susunan dulu, baru paparkan
     susunIkutPopular();
     tunjuk();
 </script>
