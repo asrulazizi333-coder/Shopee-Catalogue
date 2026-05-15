@@ -3,272 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Shopee Viral</title>
+    <title>Katalog Viral 10 Page</title>
     <style>
-        /* CSS KHAS UNTUK OPTIMASI TELEFON (MOBILE-FIRST) */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
         
         body { 
-            background: #f5f5f5; 
-            max-width: 500px; /* Paksa saiz skrin telefon walaupun dibuka di PC */
+            background: #f0f0f0; 
+            max-width: 450px; /* Mengecilkan sedikit lebar keseluruhan */
             margin: 0 auto; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            border-left: 1px solid #e0e0e0;
-            border-right: 1px solid #e0e0e0;
         }
 
-        /* Header Tegap (Sticky) */
         header { 
-            background: white; 
-            padding: 12px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            background: white; padding: 10px; position: sticky; top: 0; z-index: 100; 
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1); 
         }
         
-        h1 { font-size: 1.2rem; text-align: center; margin-bottom: 10px; color: #ee4d2d; font-weight: bold; }
-        
-        /* Kotak Carian */
-        .search-box { position: relative; margin-bottom: 10px; }
-        #searchInput { 
-            width: 100%; 
-            padding: 10px 12px; 
-            border-radius: 8px; 
-            border: 1px solid #e0e0e0; 
-            background: #f8f8f8;
-            font-size: 14px;
-            outline: none;
-        }
+        h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
+        #searchInput { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; }
 
-        /* Menu Kategori Boleh Tapis (Scroll Tepi) */
-        .kategori-container { 
-            display: flex; 
-            gap: 8px; 
-            overflow-x: auto; 
-            padding: 4px 0;
-            -webkit-overflow-scrolling: touch; 
-        }
-        .kategori-container::-webkit-scrollbar { display: none; } /* Sorok scrollbar */
-        
-        .btn-kat { 
-            padding: 6px 16px; 
-            border-radius: 20px; 
-            border: 1px solid #e0e0e0; 
-            background: white; 
-            white-space: nowrap; 
-            font-size: 0.8rem; 
-            color: #555;
-            cursor: pointer; 
-        }
-        .btn-kat.active { background: #ee4d2d; color: white; border-color: #ee4d2d; font-weight: bold; }
-
-        /* Susunan Barang Grid (2 Kolum Sekata) */
+        /* GRID: 2 Barang Semuka, Saiz Lebih Kecil */
         .container { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 8px; 
-            padding: 8px; 
+            gap: 6px; /* Jarak antara kotak lebih rapat */
+            padding: 6px; 
             flex-grow: 1;
         }
         
         .kad { 
-            background: white; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            background: white; border-radius: 6px; overflow: hidden; 
+            display: flex; flex-direction: column; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            font-size: 0.75rem;
         }
         
-        /* Kawalan Gambar Petak Sempurna */
-        .kad img { 
-            width: 100%; 
-            aspect-ratio: 1 / 1; 
-            object-fit: cover; 
-            background: #f9f9f9;
-        }
+        .kad img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
         
-        .info { padding: 8px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .info h2 { font-size: 0.8rem; color: #333; height: 2.2rem; overflow: hidden; margin-bottom: 6px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .harga { color: #ee4d2d; font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; }
+        .info { padding: 6px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .info h2 { font-size: 0.75rem; height: 2rem; overflow: hidden; margin-bottom: 4px; line-height: 1.2; color: #333; }
+        .harga { color: #ee4d2d; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; }
         
         .butang { 
-            background: #ee4d2d; 
-            color: white; 
-            text-decoration: none; 
-            text-align: center; 
-            padding: 8px; 
-            border-radius: 6px; 
-            display: block; 
-            font-size: 0.8rem; 
-            font-weight: bold; 
+            background: #ee4d2d; color: white; text-decoration: none; text-align: center; 
+            padding: 5px; border-radius: 4px; font-weight: bold; font-size: 0.7rem;
         }
 
-        /* Sistem Next Page (Pagination) */
+        /* Pagination */
         .pagination { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 15px; 
-            padding: 20px; 
-            background: white;
-            border-top: 1px solid #eee;
+            display: flex; justify-content: center; align-items: center; 
+            gap: 10px; padding: 15px; background: white; border-top: 1px solid #eee;
         }
-        .btn-page { 
-            padding: 8px 16px; 
-            border-radius: 6px; 
-            border: 1px solid #ee4d2d; 
-            background: white; 
-            color: #ee4d2d; 
-            font-size: 0.85rem; 
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .btn-page:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
-        #pageNumber { font-size: 0.9rem; font-weight: bold; color: #333; }
+        .btn-page { padding: 6px 12px; border-radius: 4px; border: 1px solid #ee4d2d; background: white; color: #ee4d2d; font-size: 0.8rem; }
+        .btn-page:disabled { border-color: #ccc; color: #ccc; }
+        #pageNumber { font-size: 0.8rem; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🛍️ Kedai Affiliate Viral</h1>
-    <div class="search-box">
-        <input type="text" id="searchInput" onkeyup="jalankanTapisan()" placeholder="Cari barang viral...">
-    </div>
-    <div class="kategori-container">
-        <button class="btn-kat active" onclick="tukarKategori('semua', this)">Semua</button>
-        <button class="btn-kat" onclick="tukarKategori('gadget', this)">Gadget</button>
-        <button class="btn-kat" onclick="tukarKategori('dapur', this)">Dapur</button>
-        <button class="btn-kat" onclick="tukarKategori('pakaian', this)">Pakaian</button>
-    </div>
+    <h1>🛍️ Katalog Viral Azizi</h1>
+    <input type="text" id="searchInput" onkeyup="tapis()" placeholder="Cari barang...">
 </header>
 
-<!-- TEMPAT EDIT BARANG ANDA -->
 <div class="container" id="produkList">
 
-    <!-- ================= PAGE 1 ================= -->
-    <!-- Barang 1 -->
-    <div class="kad" data-kategori="gadget" data-page="1">
-        <img src="MASUKKAN_URL_GAMBAR_DI_SINI">
+    <div class="kad" data-page="1">
+        <img src="URL_GAMBAR">
         <div class="info">
-            <h2 class="nama-produk">Nama Barang 1 Gadget Viral</h2>
-            <p class="harga">RM 29.90</p>
-            <a href="MASUKKAN_LINK_AFFILIATE_DI_SINI" class="butang">Beli Sekarang</a>
+            <h2 class="nama-produk">Produk 1 - Page 1</h2>
+            <p class="harga">RM 10.00</p>
+            <a href="LINK" class="butang">Beli</a>
+        </div>
+    </div>
+    <div class="kad" data-page="2">
+        <img src="URL_GAMBAR">
+        <div class="info">
+            <h2 class="nama-produk">Produk 11 - Page 2</h2>
+            <p class="harga">RM 20.00</p>
+            <a href="LINK" class="butang">Beli</a>
         </div>
     </div>
 
-    <!-- Barang 2 -->
-    <div class="kad" data-kategori="dapur" data-page="1">
-        <img src="MASUKKAN_URL_GAMBAR_DI_SINI">
-        <div class="info">
-            <h2 class="nama-produk">Nama Barang 2 Dapur Viral</h2>
-            <p class="harga">RM 45.00</p>
-            <a href="MASUKKAN_LINK_AFFILIATE_DI_SINI" class="butang">Beli Sekarang</a>
-        </div>
     </div>
 
-
-    <!-- ================= PAGE 2 ================= -->
-    <!-- Barang 3 (Akan muncul di Page 2) -->
-    <div class="kad" data-kategori="pakaian" data-page="2">
-        <img src="MASUKKAN_URL_GAMBAR_DI_SINI">
-        <div class="info">
-            <h2 class="nama-produk">Nama Barang 3 Baju Viral</h2>
-            <p class="harga">RM 19.00</p>
-            <a href="MASUKKAN_LINK_AFFILIATE_DI_SINI" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-
-    <!-- Barang 4 (Akan muncul di Page 2) -->
-    <div class="kad" data-kategori="gadget" data-page="2">
-        <img src="MASUKKAN_URL_GAMBAR_DI_SINI">
-        <div class="info">
-            <h2 class="nama-produk">Nama Barang 4 Powerbank Premium</h2>
-            <p class="harga">RM 88.00</p>
-            <a href="MASUKKAN_LINK_AFFILIATE_DI_SINI" class="butang">Beli Sekarang</a>
-        </div>
-    </div>
-
-</div>
-
-<!-- BUTANG NEXT PAGE / PREVIOUS PAGE -->
 <div class="pagination">
     <button class="btn-page" id="btnPrev" onclick="tukarHalaman(-1)">Sebelum</button>
     <span id="pageNumber">Halaman 1</span>
     <button class="btn-page" id="btnNext" onclick="tukarHalaman(1)">Seterusnya</button>
 </div>
 
-<!-- JAVASCRIPT: SISTEM AUTOMATIK UNTUK SEARCH, KATEGORI & PAGINATION -->
 <script>
-    let halamanSekarang = 1;
-    let kategoriSekarang = 'semua';
+    let pageSekarang = 1;
 
-    function tunjukProduk() {
+    function tunjuk() {
         let kad = document.getElementsByClassName('kad');
-        let adaBarangDitemui = false;
-        let carian = document.getElementById('searchInput').value.toLowerCase();
+        let cari = document.getElementById('searchInput').value.toLowerCase();
+        let adaSeterusnya = false;
 
         for (let i = 0; i < kad.length; i++) {
-            let padanKategori = (kategoriSekarang === 'semua' || kad[i].getAttribute('data-kategori') === kategoriSekarang);
-            let padanHalaman = (kad[i].getAttribute('data-page') == halamanSekarang);
             let nama = kad[i].querySelector('.nama-produk').innerText.toLowerCase();
-            let padanCarian = nama.includes(carian);
+            let p = kad[i].getAttribute('data-page');
 
-            // Jika sedang menapis/mencari, abaikan sistem "Next Page" seketika supaya semua hasil carian keluar terus
-            if (carian !== "" || kategoriSekarang !== 'semua') {
-                if (padanKategori && padanCarian) {
-                    kad[i].style.display = "";
-                } else {
-                    kad[i].style.display = "none";
-                }
-                document.querySelector('.pagination').style.display = "none"; // Sorok butang page semasa search
+            if (cari !== "") {
+                kad[i].style.display = nama.includes(cari) ? "" : "none";
+                document.querySelector('.pagination').style.display = "none";
             } else {
-                // Mod asal: Ikut sistem halaman (Page)
                 document.querySelector('.pagination').style.display = "flex";
-                if (padanHalaman) {
-                    kad[i].style.display = "";
-                } else {
-                    kad[i].style.display = "none";
-                }
+                kad[i].style.display = (p == pageSekarang) ? "" : "none";
             }
+            
+            if (parseInt(p) > pageSekarang) adaSeterusnya = true;
         }
 
-        // Kemaskini status butang Next/Prev
-        document.getElementById('pageNumber').innerText = "Halaman " + halamanSekarang;
-        document.getElementById('btnPrev').disabled = (halamanSekarang === 1);
-        
-        // Semak jika ada barang untuk page seterusnya (anda boleh tambah jumlah page sesuka hati)
-        let semakPageSeterusnya = document.querySelector(`.kad[data-page="${halamanSekarang + 1}"]`);
-        document.getElementById('btnNext').disabled = (!semakPageSeterusnya);
+        document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
+        document.getElementById('btnPrev').disabled = (pageSekarang === 1);
+        document.getElementById('btnNext').disabled = !adaSeterusnya;
     }
 
-    function tukarHalaman(arah) {
-        halamanSekarang += arah;
-        window.scrollTo(0, 0); // Auto scroll ke atas balik bila tukar page
-        tunjukProduk();
+    function tukarHalaman(n) {
+        pageSekarang += n;
+        window.scrollTo(0,0);
+        tunjuk();
     }
 
-    function tukarKategori(kat, btn) {
-        kategoriSekarang = kat;
-        halamanSekarang = 1; // Reset balik ke page 1 bila tukar kategori
-        
-        let buttons = document.getElementsByClassName('btn-kat');
-        for (let b of buttons) b.classList.remove('active');
-        btn.classList.add('active');
-        
-        document.getElementById('searchInput').value = ""; // Reset search box
-        tunjukProduk();
-    }
-
-    function jalankanTapisan() {
-        tunjukProduk();
-    }
-
-    // Jalankan sistem sebaik sahaja web dibuka
-    tunjukProduk();
+    function tapis() { tunjuk(); }
+    tunjuk();
 </script>
 
 </body>
