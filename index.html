@@ -270,12 +270,15 @@
         let namaLower = namaAsal.toLowerCase();
         let jlhKlik = klikData[namaAsal] || 0;
 
-        // --- 1. AYAT VIEWS (KECIL & IKUT SAIZ NAMA BARANG) ---
+                // --- 1. AYAT VIEWS (KEKAL "FROM YOU") ---
         let infoDiv = kads[i].querySelector('.info');
         let pKlik = kads[i].querySelector('.klik-count') || document.createElement('div');
         pKlik.className = 'klik-count';
-        // Simbol api dikecilkan sedikit di sini
-        pKlik.innerHTML = `<span style="font-size: 0.7rem;">🔥</span> ${jlhKlik} views`; 
+
+        // Ayat akan sentiasa ada "from you"
+        let ayatView = `${jlhKlik} views from you`;
+        
+        pKlik.innerHTML = `<span style="font-size: 0.7rem;">🔥</span> ${ayatView}`; 
         infoDiv.insertBefore(pKlik, kads[i].querySelector('.butang'));
 
         // --- 2. BADGE PADA GAMBAR (MINI & TAK HALANG GAMBAR) ---
