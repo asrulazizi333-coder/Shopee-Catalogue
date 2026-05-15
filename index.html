@@ -126,7 +126,7 @@
         <div class="info">
             <h2 class="nama-produk">Kerusi Healing</h2>
             <p class="harga">RM 20.37 - RM 96.03</p>
-            <a href="https://s.shopee.com.my/4qCUvQ7ReT"target="_blank"class="butang">Beli Sekarang</a>
+            <a href="https://s.shopee.com.my/4qCUvQ7ReT"target="_blank"onclick="rekodKlik('Kerusi Healing')"class="butang">Beli Sekarang</a>
         </div>
     </div>
     <div class="kad" data-page="1">
@@ -322,24 +322,54 @@
 <script>
     let pageSekarang = 1;
 
-    // Fungsi automatik paparan
+    // 1. Simpan data klik dalam telefon
+    function rekodKlik(namaProduk) {
+        let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
+        klikData[namaProduk] = (klikData[namaProduk] || 0) + 1;
+        localStorage.setItem('statistikKlik', JSON.stringify(klikData));
+    }
+
+    // 2. Susun kad ikut yang paling banyak klik
+    function susunIkutPopular() {
+        let container = document.getElementById('produkList');
+        let kads = Array.from(document.getElementsByClassName('kad'));
+        let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
+
+        kads.sort((a, b) => {
+            let namaA = a.querySelector('.nama-produk').innerText;
+            let namaB = b.querySelector('.nama-produk').innerText;
+            let klikA = klikData[namaA] || 0;
+            let klikB = klikData[namaB] || 0;
+            return klikB - klikA;
+        });
+
+        kads.forEach(kad => container.appendChild(kad));
+    }
+
     function tunjuk() {
         let kad = document.getElementsByClassName('kad');
         let cari = document.getElementById('searchInput').value.toLowerCase();
         let adaSeterusnya = false;
 
+        let itemsPerPage = 10;
+        let start = (pageSekarang - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+
         for (let i = 0; i < kad.length; i++) {
             let nama = kad[i].querySelector('.nama-produk').innerText.toLowerCase();
-            let p = kad[i].getAttribute('data-page');
-
+            
             if (cari !== "") {
                 kad[i].style.display = nama.includes(cari) ? "flex" : "none";
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
-                kad[i].style.display = (p == pageSekarang) ? "flex" : "none";
+                if (i >= start && i < end) {
+                    kad[i].style.display = "flex";
+                } else {
+                    kad[i].style.display = "none";
+                }
+                if (i >= end) adaSeterusnya = true;
             }
-            if (parseInt(p) > pageSekarang) adaSeterusnya = true;
         }
 
         document.getElementById('pageNumber').innerText = "Halaman " + pageSekarang;
@@ -352,6 +382,9 @@
         window.scrollTo(0,0);
         tunjuk();
     }
+
+    // WAJIB panggil susunan dulu baru tunjuk
+    susunIkutPopular();
     tunjuk();
 </script>
 </body>
