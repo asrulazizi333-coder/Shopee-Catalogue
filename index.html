@@ -93,10 +93,20 @@
             width: 100%; aspect-ratio: 1 / 1;
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    #scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px; /* Ketebalan garisan */
+    background: linear-gradient(to right, #ee4d2d, #ffc107); /* Warna Shopee */
+    z-index: 2000;
+    transition: width 0.1s ease-out;
+}
     </style>
 </head>
 <body>
-
+    <div id="scrollProgress"></div>
 <button id="backToTop" onclick="keAtas()">↑</button>
 <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Mod Gelap</button>
 
@@ -270,6 +280,12 @@
     // MULA
     tunjuk();
     applySkeleton();
+    window.onscroll = function() {
+    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (winScroll / height) * 100;
+    document.getElementById("scrollProgress").style.width = scrolled + "%";
+};
 </script>
 </body>
 </html>
