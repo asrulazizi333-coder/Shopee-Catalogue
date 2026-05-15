@@ -123,39 +123,37 @@
         body.dark-mode #searchInput { background: #333; color: white; border-color: #444; }
         body.dark-mode .btn-page { background: #1e1e1e; color: #ff6433; border-color: #ff6433; }
         
-                    #darkModeToggle {
-            position: fixed; 
-            bottom: 15px; 
-            left: 15px; 
-            z-index: 1000;
-            /* Kita guna rgba: 0,0,0 adalah hitam, 0.6 adalah 60% kepekatan */
-            background: rgba(0, 0, 0, 0.4); 
-            color: white; 
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Garisan nipis sekeliling */
-            border-radius: 8px; 
-            padding: 8px 12px; 
-            cursor: pointer; 
-            font-size: 0.75rem;
-            font-weight: bold;
-            /* Efek blur di belakang butang (Mac-style) */
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
+           #darkModeToggle {
+    position: fixed; 
+    bottom: 15px; 
+    left: 15px; 
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.4); 
+    color: white; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 6px; /* Lebih kecil & kemas */
+    padding: 5px 8px;   /* Kecilkan ruang dalam kotak */
+    cursor: pointer; 
+    font-size: 0.65rem; /* Kecilkan saiz tulisan */
+    font-weight: bold;
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Rapatkan emoji dengan teks */
+    transition: all 0.3s ease;
+}
 
-        /* Warna butang bila Dark Mode aktif (kekal transparent tapi tona oren) */
-        body.dark-mode #darkModeToggle { 
-            background: rgba(238, 77, 45, 0.7); 
-            border-color: rgba(255, 255, 255, 0.3);
-        }
+/* Warna bila Dark Mode aktif */
+body.dark-mode #darkModeToggle { 
+    background: rgba(238, 77, 45, 0.5); 
+    border-color: rgba(255, 255, 255, 0.2);
+}
 
-        #darkModeToggle:active {
-            transform: scale(0.95);
-        }
+#darkModeToggle:active {
+    transform: scale(0.92); /* Efek tekan lebih nampak */
+}
                      #backToTop {
             position: fixed;
             bottom: 15px;
