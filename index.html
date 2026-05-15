@@ -7,7 +7,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
         
-        /* MEMAKSA SELURUH WEBSITE DUDUK DI TENGAH SKRIN PC/PAD */
         html {
             background: #e4e4e4;
             display: flex;
@@ -17,7 +16,7 @@
         body { 
             background: #f0f0f0; 
             width: 100%;
-            max-width: 450px; /* Saiz standard telefon */
+            max-width: 450px; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -32,7 +31,6 @@
         h1 { font-size: 1rem; text-align: center; margin-bottom: 8px; color: #ee4d2d; }
         #searchInput { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; outline: none; }
 
-        /* GRID 2 SEBARIS */
         .container { 
             display: flex;
             flex-wrap: wrap;
@@ -48,7 +46,7 @@
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
-            width: 49%; /* Paksa 2 sebaris */
+            width: 49%; 
             margin-bottom: 4px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
@@ -60,7 +58,6 @@
             display: block;
         }
         
-        /* INFO RAPAT */
         .info { 
             padding: 6px; 
             display: flex; 
@@ -95,7 +92,6 @@
             display: block;
         }
 
-        /* BUTANG HALAMAN (PAGINATION) TENGAH-TENGAH */
         .pagination { 
             display: flex; 
             justify-content: center; 
@@ -103,7 +99,7 @@
             gap: 15px; 
             padding: 15px; 
             background: white; 
-            margin-top: auto; /* Paksa duduk paling bawah sekali */
+            margin-top: auto; 
             width: 100%;
             border-top: 1px solid #eee;
         }
@@ -120,7 +116,7 @@
 </header>
 
 <div class="container" id="produkList">
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://down-my.img.susercontent.com/file/my-11134207-820lc-mk299ppbr1mq92@resize_w1920_nl.webp">
         <div class="info">
             <h2 class="nama-produk">Kerusi Healing</h2>
@@ -128,7 +124,7 @@
             <a href="https://s.shopee.com.my/4qCUvQ7ReT" target="_blank" onclick="rekodKlik('Kerusi Healing')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/201">
         <div class="info">
             <h2 class="nama-produk">Barang 2</h2>
@@ -136,7 +132,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 2')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/202">
         <div class="info">
             <h2 class="nama-produk">Barang 3</h2>
@@ -144,7 +140,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 3')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/203">
         <div class="info">
             <h2 class="nama-produk">Barang 4</h2>
@@ -152,7 +148,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 4')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/204">
         <div class="info">
             <h2 class="nama-produk">Barang 5</h2>
@@ -160,7 +156,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 5')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/205">
         <div class="info">
             <h2 class="nama-produk">Barang 6</h2>
@@ -168,7 +164,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 6')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/206">
         <div class="info">
             <h2 class="nama-produk">Barang 7</h2>
@@ -176,7 +172,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 7')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/207">
         <div class="info">
             <h2 class="nama-produk">Barang 8</h2>
@@ -184,7 +180,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 8')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/208">
         <div class="info">
             <h2 class="nama-produk">Barang 9</h2>
@@ -192,7 +188,7 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 9')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="1">
+    <div class="kad">
         <img src="https://picsum.photos/209">
         <div class="info">
             <h2 class="nama-produk">Barang 10</h2>
@@ -200,119 +196,112 @@
             <a href="#" target="_blank" onclick="rekodKlik('Barang 10')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    
-    </div>
 
-    <!-- Halaman 2 (10 Barang) -->
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/210">
         <div class="info">
-            <h2 class="nama-produk">Barang 11 (Halaman 2)</h2>
+            <h2 class="nama-produk">Barang 11</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 11')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/211">
         <div class="info">
             <h2 class="nama-produk">Barang 12</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 12')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/212">
         <div class="info">
             <h2 class="nama-produk">Barang 13</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 13')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/213">
         <div class="info">
             <h2 class="nama-produk">Barang 14</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 14')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/214">
         <div class="info">
             <h2 class="nama-produk">Barang 15</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 15')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/215">
         <div class="info">
             <h2 class="nama-produk">Barang 16</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 16')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/216">
         <div class="info">
             <h2 class="nama-produk">Barang 17</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 17')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/217">
         <div class="info">
             <h2 class="nama-produk">Barang 18</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 18')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/218">
         <div class="info">
             <h2 class="nama-produk">Barang 19</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 19')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <div class="kad" data-page="2">
+    <div class="kad">
         <img src="https://picsum.photos/219">
         <div class="info">
             <h2 class="nama-produk">Barang 20</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 20')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-
-    <!-- Halaman 3 -->
-    <div class="kad" data-page="3">
+    <div class="kad">
         <img src="https://picsum.photos/220">
         <div class="info">
-            <h2 class="nama-produk">Barang 21 (Halaman 3)</h2>
+            <h2 class="nama-produk">Barang 21</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 21')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <!-- Halaman 4 -->
-    <div class="kad" data-page="4">
+    <div class="kad">
         <img src="https://picsum.photos/221">
         <div class="info">
-            <h2 class="nama-produk">Barang 31 (Halaman 4)</h2>
+            <h2 class="nama-produk">Barang 31</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 31')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-    <!-- Halaman 5 -->
-    <div class="kad" data-page="5">
+    <div class="kad">
         <img src="https://picsum.photos/222">
         <div class="info">
-            <h2 class="nama-produk">Barang 41 (Halaman 5)</h2>
+            <h2 class="nama-produk">Barang 41</h2>
             <p class="harga">RM 20.00</p>
-            <a href="#" class="butang">Beli Sekarang</a>
+            <a href="#" target="_blank" onclick="rekodKlik('Barang 41')" class="butang">Beli Sekarang</a>
         </div>
     </div>
-</div> <!-- TAG PENUTUP CONTAINER YANG HILANG DAH DIURUSKAN DI SINI -->
+</div>
 
 <div class="pagination">
     <button class="btn-page" id="btnPrev" onclick="tukarHalaman(-1)">Sebelum</button>
@@ -323,14 +312,12 @@
 <script>
     let pageSekarang = 1;
 
-    // 1. Simpan data klik dalam telefon
     function rekodKlik(namaProduk) {
         let klikData = JSON.parse(localStorage.getItem('statistikKlik')) || {};
         klikData[namaProduk] = (klikData[namaProduk] || 0) + 1;
         localStorage.setItem('statistikKlik', JSON.stringify(klikData));
     }
 
-    // 2. Susun kad ikut yang paling banyak klik
     function susunIkutPopular() {
         let container = document.getElementById('produkList');
         let kads = Array.from(document.getElementsByClassName('kad'));
@@ -341,7 +328,7 @@
             let namaB = b.querySelector('.nama-produk').innerText;
             let klikA = klikData[namaA] || 0;
             let klikB = klikData[namaB] || 0;
-            return klikB - klikA;
+            return klikB - klikA; 
         });
 
         kads.forEach(kad => container.appendChild(kad));
@@ -350,11 +337,12 @@
     function tunjuk() {
         let kad = document.getElementsByClassName('kad');
         let cari = document.getElementById('searchInput').value.toLowerCase();
-        let adaSeterusnya = false;
-
         let itemsPerPage = 10;
-        let start = (pageSekarang - 1) * itemsPerPage;
-        let end = start + itemsPerPage;
+        
+        let indexMula = (pageSekarang - 1) * itemsPerPage;
+        let indexTamat = pageSekarang * itemsPerPage;
+        
+        let adaSeterusnya = false;
 
         for (let i = 0; i < kad.length; i++) {
             let nama = kad[i].querySelector('.nama-produk').innerText.toLowerCase();
@@ -364,12 +352,14 @@
                 document.querySelector('.pagination').style.display = "none";
             } else {
                 document.querySelector('.pagination').style.display = "flex";
-                if (i >= start && i < end) {
+                if (i >= indexMula && i < indexTamat) {
                     kad[i].style.display = "flex";
                 } else {
                     kad[i].style.display = "none";
                 }
-                if (i >= end) adaSeterusnya = true;
+                if (i >= indexTamat) {
+                    adaSeterusnya = true;
+                }
             }
         }
 
@@ -384,7 +374,6 @@
         tunjuk();
     }
 
-    // WAJIB panggil susunan dulu baru tunjuk
     susunIkutPopular();
     tunjuk();
 </script>
