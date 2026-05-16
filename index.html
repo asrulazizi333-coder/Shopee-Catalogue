@@ -29,6 +29,42 @@
             position: relative;
         }
 
+        /* --- TAMBAHAN: CSS UNTUK BANNER PENGUMUMAN --- */
+        #announcement-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            max-width: 450px; /* Supaya lebar dia sama dengan saiz fon body katalog */
+            background-color: #ff4500; /* Warna oren ala Shopee */
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+            z-index: 9999; /* Sentiasa di lapisan paling atas */
+            display: none; 
+        }
+
+        .marquee {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marqueeEffect 5s linear; /* Bergerak selama 5 saat */
+        }
+
+        @keyframes marqueeEffect {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        /* Banner bila Mod Gelap aktif */
+        body.dark-mode #announcement-container {
+            background-color: #b33000; 
+        }
+        /* ------------------------------------------- */
+
         /* FEATURE: CUSTOM SCROLLBAR KANAN */
         #customScrollbarContainer {
             position: fixed;
@@ -156,6 +192,13 @@
      </style>
 </head>
 <body>
+
+<!-- TAMBAHAN HTML: Struktur Banner Pengumuman diletakkan paling atas dalam body -->
+<div id="announcement-container">
+    <div id="announcement-text" class="marquee">
+        ⚠️ Nota: Harga tersebut tidak termasuk dengan baucar Shopee anda.
+    </div>
+</div>
 
 <div id="customScrollbarContainer">
     <div id="customScrollbarThumb"></div>
@@ -413,6 +456,31 @@ function tambahBadge(kad, kelas, teks) {
             if (img.complete) { skeleton.remove(); img.style.display = 'block'; }
         });
     }
+
+    // --- TAMBAHAN JAVASCRIPT: LOGIK LOOP 15 SAAT ---
+    const annContainer = document.getElementById('announcement-container');
+    const annText = document.getElementById('announcement-text');
+
+    function jalankanPengumuman() {
+        annContainer.style.display = 'block';
+        
+        // Reset animasi css marquee
+        annText.classList.remove('marquee');
+        void annText.offsetWidth; // Trigger reflow
+        annText.add = annText.classList.add('marquee');
+
+        // Sembunyikan semula banner selepas teks habis lalu (5 saat)
+        setTimeout(() => {
+            annContainer.style.display = 'none';
+        }, 5000); 
+    }
+
+    // Mula buat kali pertama selepas 1 saat page di-load
+    setTimeout(jalankanPengumuman, 1000);
+
+    // Ulang setiap 15 saat (15000 milisaat)
+    setInterval(jalankanPengumuman, 15000);
+    // ------------------------------------------------
 
     // RUN ON LOAD
     tunjuk();
