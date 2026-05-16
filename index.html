@@ -29,13 +29,9 @@
             position: relative;
         }
 
-        /* --- KOD BARU BANNER: LEBIH STABIL & SENTIASA CUKUP MASA --- */
+        /* --- KOD BANNER DIUBAH: KINI DI BAWAH KOTAK CARIAN --- */
         #announcement-container {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            max-width: 450px;
             background-color: #ff4500; /* Warna oren ala Shopee */
             color: white;
             font-size: 13px;
@@ -43,8 +39,9 @@
             padding: 6px 0;
             overflow: hidden;
             white-space: nowrap;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-            z-index: 9999;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            margin-top: 8px; /* Jarak dari kotak carian */
             display: none; /* Dikawal oleh JavaScript */
         }
 
@@ -187,13 +184,6 @@
 </head>
 <body>
 
-<!-- KOD BARU HTML BANNER: Menggunakan tag marquee dengan scrollamount="5" (5 bermaksud perlahan dan santai) -->
-<div id="announcement-container">
-    <marquee id="announcement-marquee" behavior="scroll" direction="left" scrollamount="5">
-        ⚠️ Nota: Harga tersebut tidak termasuk dengan baucar Shopee anda. Sila claim voucher untuk dapatkan harga yang lebih murah. 
-    </marquee>
-</div>
-
 <div id="customScrollbarContainer">
     <div id="customScrollbarThumb"></div>
 </div>
@@ -204,6 +194,13 @@
 <header>
     <h1 onclick="window.location.reload();" style="cursor: pointer;">🛍️ Katalog Shopee By Ashraf Ezra</h1>
     <input type="text" id="searchInput" onkeyup="tunjuk()" placeholder="Cari barang...">
+    
+    <!-- KOD HTML BANNER DIALIKKAN KE SINI (DI BAWAH INPUT CARIAN) -->
+    <div id="announcement-container">
+        <marquee id="announcement-marquee" behavior="scroll" direction="left" scrollamount="5">
+            ⚠️ Nota: Harga tersebut tidak termasuk dengan baucar Shopee anda. Sila claim voucher untuk dapatkan harga yang lebih murah. 
+        </marquee>
+    </div>
 </header>
 
 <div class="container" id="produkList">
@@ -291,7 +288,7 @@
     <div class="kad"><img src="https://picsum.photos/274"><div class="info"><h2 class="nama-produk">Barang 74</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 74')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/275"><div class="info"><h2 class="nama-produk">Barang 75</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 75')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/276"><div class="info"><h2 class="nama-produk">Barang 76</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 76')" class="butang">Beli Sekarang</a></div></div>
-    <div class="kad"><img src="https://picsum.photos/277"><div class="info"><h2 class="nama-produk">Barang 77</h2><p class="harga">RM 20.00</p><a/></div class="info"></div>
+    <div class="kad"><img src="https://picsum.photos/277"><div class="info"><h2 class="nama-produk">Barang 77</h2><p class="harga">RM 20.00</p><a></div></div>
     <div class="kad"><img src="https://picsum.photos/278"><div class="info"><h2 class="nama-produk">Barang 78</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 78')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/279"><div class="info"><h2 class="nama-produk">Barang 79</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 79')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/280"><div class="info"><h2 class="nama-produk">Barang 80</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 80')" class="butang">Beli Sekarang</a></div></div>
