@@ -29,41 +29,35 @@
             position: relative;
         }
 
-        /* --- TAMBAHAN: CSS UNTUK BANNER PENGUMUMAN --- */
+        /* --- KOD BARU BANNER: LEBIH STABIL & SENTIASA CUKUP MASA --- */
         #announcement-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            max-width: 450px; /* Supaya lebar dia sama dengan saiz fon body katalog */
+            max-width: 450px;
             background-color: #ff4500; /* Warna oren ala Shopee */
             color: white;
             font-size: 13px;
             font-weight: bold;
-            padding: 8px 0;
+            padding: 6px 0;
             overflow: hidden;
             white-space: nowrap;
             box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-            z-index: 9999; /* Sentiasa di lapisan paling atas */
-            display: none; 
+            z-index: 9999;
+            display: none; /* Dikawal oleh JavaScript */
         }
 
-        .marquee {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marqueeEffect 9s linear; /* Bergerak selama 5 saat */
+        #announcement-container marquee {
+            display: block;
+            width: 100%;
         }
 
-        @keyframes marqueeEffect {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100vw, 0, 0); }
-        }
-
-        /* Banner bila Mod Gelap aktif */
+        /* Warna banner bila Mod Gelap aktif */
         body.dark-mode #announcement-container {
             background-color: #b33000; 
         }
-        /* ------------------------------------------- */
+        /* ----------------------------------------------------------- */
 
         /* FEATURE: CUSTOM SCROLLBAR KANAN */
         #customScrollbarContainer {
@@ -159,24 +153,24 @@
             width: 100%; aspect-ratio: 1 / 1;
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        /* Badge pada gambar - Dibuat lebih kecil & halus */
+
 .badge-hot {
     position: absolute; 
     top: 5px; 
     left: 5px; 
     padding: 2px 5px; 
     border-radius: 3px; 
-    font-size: 0.55rem; /* Saiz mini */
+    font-size: 0.55rem; 
     font-weight: bold; 
     color: white;
     z-index: 10; 
-    background: rgba(255, 69, 0, 0.85); /* Warna api transparan */
+    background: rgba(255, 69, 0, 0.85); 
     text-transform: uppercase;
     animation: pulse 1.5s infinite;
 }
 
 .klik-count { 
-    font-size: 0.75rem; /* Sama saiz nama barang */
+    font-size: 0.75rem; 
     color: #666; 
     margin-bottom: 4px; 
     display: flex;
@@ -193,11 +187,11 @@
 </head>
 <body>
 
-<!-- TAMBAHAN HTML: Struktur Banner Pengumuman diletakkan paling atas dalam body -->
+<!-- KOD BARU HTML BANNER: Menggunakan tag marquee dengan scrollamount="5" (5 bermaksud perlahan dan santai) -->
 <div id="announcement-container">
-    <div id="announcement-text" class="marquee">
-        ⚠️ Nota: Harga yang dipaparkan belum ditolak baucar Shopee. Sila claim baucar shopee untuk mendapatkan harga yang lebih murah. 
-    </div>
+    <marquee id="announcement-marquee" behavior="scroll" direction="left" scrollamount="5">
+        ⚠️ Nota: Harga tersebut tidak termasuk dengan baucar Shopee anda. Sila claim voucher untuk dapatkan harga yang lebih murah. 
+    </marquee>
 </div>
 
 <div id="customScrollbarContainer">
@@ -297,7 +291,7 @@
     <div class="kad"><img src="https://picsum.photos/274"><div class="info"><h2 class="nama-produk">Barang 74</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 74')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/275"><div class="info"><h2 class="nama-produk">Barang 75</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 75')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/276"><div class="info"><h2 class="nama-produk">Barang 76</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 76')" class="butang">Beli Sekarang</a></div></div>
-    <div class="kad"><img src="https://picsum.photos/277"><div class="info"><h2 class="nama-produk">Barang 77</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 77')" class="butang">Beli Sekarang</a></div></div>
+    <div class="kad"><img src="https://picsum.photos/277"><div class="info"><h2 class="nama-produk">Barang 77</h2><p class="harga">RM 20.00</p><a/></div class="info"></div>
     <div class="kad"><img src="https://picsum.photos/278"><div class="info"><h2 class="nama-produk">Barang 78</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 78')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/279"><div class="info"><h2 class="nama-produk">Barang 79</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 79')" class="butang">Beli Sekarang</a></div></div>
     <div class="kad"><img src="https://picsum.photos/280"><div class="info"><h2 class="nama-produk">Barang 80</h2><p class="harga">RM 20.00</p><a href="#" target="_blank" onclick="rekodKlik('Barang 80')" class="butang">Beli Sekarang</a></div></div>
@@ -360,29 +354,26 @@
         let namaLower = namaAsal.toLowerCase();
         let jlhKlik = klikData[namaAsal] || 0;
 
-                // --- 1. AYAT VIEWS (KEKAL "FROM YOU") ---
         let infoDiv = kads[i].querySelector('.info');
         let pKlik = kads[i].querySelector('.klik-count') || document.createElement('div');
         pKlik.className = 'klik-count';
 
-        // Ayat akan sentiasa ada "from you"
         let ayatView = `${jlhKlik} views from you`;
         
         pKlik.innerHTML = `<span style="font-size: 0.7rem;">🔥</span> ${ayatView}`; 
-        infoDiv.insertBefore(pKlik, kads[i].querySelector('.butang'));
+        if (kads[i].querySelector('.butang')) {
+            infoDiv.insertBefore(pKlik, kads[i].querySelector('.butang'));
+        }
 
-        // --- 2. BADGE PADA GAMBAR (MINI & TAK HALANG GAMBAR) ---
         let oldBadge = kads[i].querySelector('.badge-hot');
         if (oldBadge) oldBadge.remove(); 
 
         if (jlhKlik > 0 && cari === "") {
-            // Hanya untuk Top 3 yang sudah disusun
             if (i === 0 || i === 1 || i === 2) {
                 tambahBadge(kads[i], 'rank-1', 'MOST VIEWED');
             }
         }
 
-        // --- 3. LOGIK SEARCH & PAGINATION ---
         if (cari !== "") {
             kads[i].style.display = namaLower.includes(cari) ? "flex" : "none";
             kads[i].classList.add('nampak');
@@ -404,7 +395,6 @@
     aktifkanScrollReveal();
 }
 
-// Pastikan fungsi ini juga ada untuk handle simbol api dalam badge
 function tambahBadge(kad, kelas, teks) {
     let b = document.createElement('div');
     b.className = `badge-hot ${kelas}`;
@@ -421,15 +411,12 @@ function tambahBadge(kad, kelas, teks) {
     // 3. LOGIK SKROL (SCROLLBAR & ARROW)
     window.onscroll = function() {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         
-        // Update Scrollbar Kanan
         let thumb = document.getElementById("customScrollbarThumb");
         let thumbHeightPercent = (window.innerHeight / document.documentElement.scrollHeight) * 100;
         thumb.style.height = thumbHeightPercent + "%";
         thumb.style.top = (winScroll / document.documentElement.scrollHeight) * 100 + "%";
 
-        // Tunjuk Butang Back To Top
         let btn = document.getElementById("backToTop");
         btn.style.display = (winScroll > 300) ? "flex" : "none";
     };
@@ -457,30 +444,30 @@ function tambahBadge(kad, kelas, teks) {
         });
     }
 
-    // --- TAMBAHAN JAVASCRIPT: LOGIK LOOP 15 SAAT ---
+    // --- LOGIK BARU JAVASCRIPT: BERHENTI MENGEJUT DAH SETTLE ---
     const annContainer = document.getElementById('announcement-container');
-    const annText = document.getElementById('announcement-text');
+    const mq = document.getElementById('announcement-marquee');
 
     function jalankanPengumuman() {
+        // Paparkan banner semula
         annContainer.style.display = 'block';
         
-        // Reset animasi css marquee
-        annText.classList.remove('marquee');
-        void annText.offsetWidth; // Trigger reflow
-        annText.add = annText.classList.add('marquee');
+        // Mulakan semula pergerakan marquee dari hujung kanan
+        mq.start();
 
-        // Sembunyikan semula banner selepas teks habis lalu (5 saat)
+        // Banner hanya akan ditutup setelah 9 saat (Masa yang cukup untuk ayat lalu sampai habis)
         setTimeout(() => {
             annContainer.style.display = 'none';
-        }, 5000); 
+            mq.stop(); // Rehatkan sekejap pergerakan di latar belakang
+        }, 9000); 
     }
 
-    // Mula buat kali pertama selepas 1 saat page di-load
+    // Jalankan pertama kali, 1 saat selepas buka kedai
     setTimeout(jalankanPengumuman, 1000);
 
-    // Ulang setiap 15 saat (15000 milisaat)
+    // Ulang dengan konsisten setiap 15 saat
     setInterval(jalankanPengumuman, 15000);
-    // ------------------------------------------------
+    // ------------------------------------------------------------
 
     // RUN ON LOAD
     tunjuk();
